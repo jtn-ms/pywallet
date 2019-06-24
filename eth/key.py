@@ -11,7 +11,13 @@ def privkeyfromstring(string='dog'):
     privkey = sha3(string)
     pubkey = privtopub(privkey)
     addr = privtoaddr(privkey)
-    return encode_hex(addr),encode_hex(privkey),pubkey
+    return encode_hex(addr),encode_hex(privkey)
+
+def privkeyfromrandom():
+    import os
+    privkey = os.urandom(32)
+    addr = privtoaddr(privkey)
+    return addr.encode('hex'),privkey.encode('hex')
 
 def privkeyfromfile(filename,passwd):
     with open(filename) as f:
@@ -30,3 +36,4 @@ def test_get_privkey():
         
 if __name__ == "__main__":
     print(privkeyfromstring())
+    print(privkeyfromrandom())
