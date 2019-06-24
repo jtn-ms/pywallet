@@ -19,21 +19,31 @@ def privkeyfromrandom():
     addr = privtoaddr(privkey)
     return addr.encode('hex'),privkey.encode('hex')
 
+from ethereum.tools.keys import decode_keystore_json
+from ethereum.tools.keys import make_keystore_json
+
 def privkeyfromfile(filename,passwd):
     with open(filename) as f:
         import json
         data = json.load(f)
-        from ethereum.tools.keys import decode_keystore_json
-        from rlp.utils import encode_hex
         return encode_hex(decode_keystore_json(data,passwd))
 
-def test_get_privkey():
+def decryptkeyfile():
     import sys
     if len(sys.argv) > 2:
         privkey = privkeyfromfile(sys.argv[1],sys.argv[2])
         print(privkey)
         print(privtoaddr(decode_hex(privkey)))
         
+def makekeyfile(passwd):
+    import os
+    priv = os.urandom(32)
+    encrypted=make_keystore_json(priv=priv,pw=passwd,kdf="pbkdf2", cipher="aes-128-ctr")
+    return priv,encrypted
+
 if __name__ == "__main__":
     print(privkeyfromstring())
     print(privkeyfromrandom())
+    encrypted = makekeyfile('123')
+    print encode_hex(encrypted[0])
+    print encode_hex(decode_keystore_json(encrypted[1],'123'))
