@@ -21,3 +21,6 @@ def sign(key,data):
     assert tx.startgas >= tx.intrinsic_gas_used
     signed_rlp=rlp.encode(tx.sign(key),TransactionEx)
     return encode_hex(signed_rlp)
+
+def broadcast():
+    pass
