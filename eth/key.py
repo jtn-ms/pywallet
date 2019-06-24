@@ -44,6 +44,4 @@ def makekeyfile(passwd):
 if __name__ == "__main__":
     print(privkeyfromstring())
     print(privkeyfromrandom())
-    encrypted = makekeyfile('123')
-    print encode_hex(encrypted[0])
-    print encode_hex(decode_keystore_json(encrypted[1],'123'))
+    
