@@ -19,6 +19,9 @@ def privkeyfromrandom():
     addr = privtoaddr(privkey)
     return addr.encode('hex'),privkey.encode('hex')
 
+def priv2addr(privkey):
+    return privtoaddr(decode_hex(privkey)).encode('hex')
+
 from ethereum.tools.keys import decode_keystore_json
 from ethereum.tools.keys import make_keystore_json
 
