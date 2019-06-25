@@ -44,4 +44,3 @@ def makekeyfile(passwd):
 if __name__ == "__main__":
     print(privkeyfromstring())
     print(privkeyfromrandom())
-    
