@@ -10,3 +10,6 @@ mine:
 
 tar:
 	@tar cf $(CURDIR)/../test.tar.gz *
+
+stop:
+	@pkill -9 python
