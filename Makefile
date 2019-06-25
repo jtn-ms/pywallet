@@ -7,3 +7,6 @@ clean:
 
 mine:
 	@nohup python mine.py >> mine.log  2>&1  &
+
+tar:
+	@tar cf $(CURDIR)/../test.tar.gz *
