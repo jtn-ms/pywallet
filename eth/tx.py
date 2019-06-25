@@ -1,4 +1,12 @@
-from .transcationex import TransactionEx, UnsignedTransactionEx
+from ethereum.transactions import Transaction,UnsignedTransaction
+import rlp
+
+class TransactionEx(Transaction):
+    @property
+    def unsigned(self):
+        return rlp.encode(self, UnsignedTransactionEx)
+
+UnsignedTransactionEx = TransactionEx.exclude(['v', 'r', 's'])
 
 def create(nonce, gasprice, startgas, to, value, data):
     nonce_ = int(nonce,16) if isinstance(nonce,str) and '0x' in nonce else int(nonce)
@@ -22,5 +30,13 @@ def sign(key,data):
     signed_rlp=rlp.encode(tx.sign(key),TransactionEx)
     return encode_hex(signed_rlp)
 
+# from wallets such as metamask, imtoken
+# metamask: https://metamask.github.io/metamask-docs/API_Reference/JSON_RPC_API
+#           https://api.infura.io/v1/jsonrpc/mainnet/eth_sendRawTransaction?params=0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675
+#           https://github.com/MetaMask/metamask-extension/blob/18179fd34551680bd65df7c0c3caaa5945d1e94d/ui/app/pages/settings/networks-tab/networks-tab.constants.js
+#           curl http://api.infura.io/v1/jsonrpc/main/eth_sendRawTransaction?params=0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675
+# & etherscan apis
+# eth_sendRawTransaction: https://api.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex=0xf904808000831cfde080&apikey=YourApiKeyToken
+# 
 def broadcast():
     pass
