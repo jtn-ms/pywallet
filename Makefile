@@ -5,7 +5,7 @@ clean:
 	@find -name .pytest_cache | xargs rm -rf
 	@find -name .cache | xargs rm -rf
 
-mine:
+mine.eth:
 	@nohup python mine.py >> mine.log  2>&1  &
 
 tar:
