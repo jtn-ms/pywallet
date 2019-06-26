@@ -16,7 +16,7 @@ def getbalance(address):
     address = "0x%s"%address if not address.startswith("0x") else address
     try:
         url = 'https://api.infura.io/v1/jsonrpc/mainnet/eth_getBalance?params=%5B%22{0}%22%2C%22latest%22%5D'.format(address)
-        print address
+        # print address
         res = requests.get(url)
         if res.status_code != 200:
             return 0
