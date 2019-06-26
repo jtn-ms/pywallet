@@ -17,7 +17,10 @@ stop.all:
 # Ethereum Operations
 genkey.eth:
 	@read -p "Type Key String: " seed; \
-	 python -c "from eth.key import privkeyfromstring; print privkeyfromstring('$$seed')"	
+	 python -c "from eth.key import privkeyfromstring; print privkeyfromstring('$$seed')"
+
+genkey.rand.eth:
+	@python -c "from eth.key import privkeyfromrandom; print privkeyfromrandom()"
 
 chkacc.eth:
 	@read -p "Type Address: " address; \
