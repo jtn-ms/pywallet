@@ -33,4 +33,3 @@ def sign(key,data):
 def broadcast(signed):
     from eth.req import sendrawtransaction
     return sendrawtransaction(signed)
-
