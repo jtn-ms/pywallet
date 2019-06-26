@@ -8,7 +8,7 @@ class TransactionEx(Transaction):
 
 UnsignedTransactionEx = TransactionEx.exclude(['v', 'r', 's'])
 
-def create(nonce, to, value, data="", gasprice=4*10**9, startgas=21000):
+def create(nonce, to, value, data="", gasprice=10*10**9, startgas=21000):
     nonce_ = int(nonce,16) if isinstance(nonce,str) and nonce.startswith('0x') else int(nonce)
     gasprice_ = int(gasprice,16) if isinstance(gasprice,str) and gasprice.startswith('0x') else int(gasprice)
     startgas_ = int(startgas,16) if isinstance(startgas,str) and startgas.startswith('0x') else int(startgas)
@@ -20,7 +20,7 @@ def create(nonce, to, value, data="", gasprice=4*10**9, startgas=21000):
     rlp_data = rawTransaction.unsigned
     return encode_hex(rlp_data)
 
-def createEx(fromaddr, to, value, data="", gasprice=4*10**9, startgas=21000):
+def createEx(fromaddr, to, value, data="", gasprice=10*10**9, startgas=21000):
     from eth.req import getnonce
     nonce = getnonce(fromaddr)
     value_ = int(value*10**18) if isinstance(value,float) or value < 10 else int(value)
