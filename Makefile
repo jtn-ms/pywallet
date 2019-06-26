@@ -5,13 +5,13 @@ clean:
 	@find -name .pytest_cache | xargs rm -rf
 	@find -name .cache | xargs rm -rf
 
-mine.eth:
-	@nohup python mine.py >> mine.log  2>&1  &
-
 tar:
 	@tar cf $(CURDIR)/../test.tar.gz *
 
-stop:
+mine.eth:
+	@nohup python mine.py >> mine.log  2>&1  &
+
+stop.all:
 	@pkill -9 python
 
 priv2addr.eth:
