@@ -4,3 +4,4 @@ eth-hash==0.1.1
 eth-utils==1.0.3
 ethereum-serpent==2.0.4
 pyethash==0.1.27
+rlp==0.6.0
