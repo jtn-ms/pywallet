@@ -13,6 +13,7 @@ def str2dict(string):
     return json.loads(json_acceptable_string)
 
 def getbalance(address):
+    address = "0x%s"%address if not address.startswith("0x") else address
     try:
         url = 'https://api.infura.io/v1/jsonrpc/mainnet/eth_getBalance?params=%5B%22{0}%22%2C%22latest%22%5D'.format(address)
         print address
@@ -39,4 +40,4 @@ def sendrawtransaction(signed):
     except Exception as e: return False
 
 if __name__ == "__main__":
-    print getbalance("0xc94770007dda54cF92009BFF0dE90c06F603a09f")
+    print getbalance("0xfac648c71eae43c518bc6676eb29ebb448d6e794")

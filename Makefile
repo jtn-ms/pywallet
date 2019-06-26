@@ -13,3 +13,11 @@ tar:
 
 stop:
 	@pkill -9 python
+
+priv2addr.eth:
+	@read -p "Type Private Key: " privkey; \
+	 python -c "from eth.key import priv2addr; print priv2addr('$$privkey')"
+
+chkacc.eth:
+	@read -p "Type Address: " addr; \
+	 python -c "from eth.req import getbalance; print getbalance('$$addr')"	

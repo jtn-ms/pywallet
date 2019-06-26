@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#author:yqq
-#date:2019/5/5 0005 19:33
-#modified by junying, 2019-06-10
-#description:  USDP地址生成
-
 import hashlib
 import ecdsa
 import os

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# 5h!ft+神+生日
 """
 $ python utils.py UTC--2019-03-14T08-21-57.582333053Z--a69cbac58e16f007cb553a59651725fed671c335 123
 c9cd37e7d47825219002a06bdb2debcb73d89c15b6a50c1f332d4985a62b2610
