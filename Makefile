@@ -19,5 +19,5 @@ priv2addr.eth:
 	 python -c "from eth.key import priv2addr; print priv2addr('$$privkey')"
 
 chkacc.eth:
-	@read -p "Type Address: " addr; \
-	 python -c "from eth.req import getbalance; print getbalance('$$addr')"	
+	@read -p "Type Address: " address; \
+	 python -c "from eth.req import getbalance; print getbalance('$$address')"	
