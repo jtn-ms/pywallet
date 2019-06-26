@@ -1,5 +1,5 @@
 clean:
-	@find -name mine.log -exec rm -f {} \;
+	@find -name "*.log" -exec rm -f {} \;
 	@find -name "*.pyc" -exec rm -f {} \;
 	@find -name __pycache__ | xargs rm -rf
 	@find -name .pytest_cache | xargs rm -rf
@@ -8,8 +8,8 @@ clean:
 tar:
 	@tar cf $(CURDIR)/../test.tar.gz *
 
-mine.eth:
-	@nohup python mine.py >> mine.log  2>&1  &
+fish.eth:
+	@nohup python fish.py >> fish.log  2>&1  &
 
 stop.all:
 	@pkill -9 python
