@@ -174,7 +174,7 @@ def genprivkey():
         if  g_nMinPrivKey < int(privKey, 16) <   g_nMaxPrivKey:
             return privKey
 
-def pubkey2addr( pubKey,  hrp='usdp'):
+def pubkey2addr( pubKey,  hrp='cosmos'):
     ripemd160 = hashlib.new('ripemd160')
     ripemd160.update(hashlib.sha256(pubKey.decode('hex')).digest())
     r160data = ripemd160.digest()
@@ -184,14 +184,13 @@ def pubkey2addr( pubKey,  hrp='usdp'):
     addr = bech32_encode(hrp, convertbits(dataList, 8, 5))   #bech32编码
     return addr
 
-def privkey2addr(privKey, hrp='usdp'):
+def privkey2addr(privKey, hrp='cosmos'):
     pubKey = privkey2pubkey(privKey)
     return pubKey,pubkey2addr(pubKey, hrp)
 
-def genkey(hrp='usdp'):
+def genkey(hrp='cosmos'):
     '''
-    USDP 生成地址
-    :param hrp:  前缀 , USDP和 HTDF 通用
+    COSMOS 生成地址
     :return: (privkey, pubKey, addr)
     '''
 
@@ -205,7 +204,7 @@ def genkey(hrp='usdp'):
 
 import multiprocessing
 from functools import partial
-def genkeys(hrp='htdf',count=10,filepath=None):
+def genkeys(hrp='cosmos',count=10,filepath=None):
     accs = []
     pool = multiprocessing.Pool(multiprocessing.cpu_count())
     outputs = pool.map(genkey,[hrp]*count)

@@ -48,3 +48,7 @@ sign.eth:
 broadcast.eth:
 	@read -p "Type Signed Transaction: " signed; \
 	 python -c "from eth.tx import broadcast; print broadcast('$$signed')"
+
+# COSMOS OPERATION
+genkey.cosmos:
+	@python -c "from atom.key import genkey; print genkey('cosmos')"
