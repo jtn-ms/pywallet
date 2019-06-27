@@ -21,3 +21,5 @@
 #### ethereum
     https://etherscan.io/
     https://www.ethgasstation.info/
+#### masterpieces scrapping
+    https://github.com/rushilsrivastava/image_search

@@ -1,8 +1,8 @@
 # written by junying, 2019-06-27
 # strategy 1: random hunt
 # strategy 2: dictionary hunt(meaningful words or sentence)
-# strategy 3: dictionary hunt(meaningful image or mark)
-# strategy 4:
+# strategy 3: dictionary hunt(meaningful image or mark) 
+# strategy 4: 
 
 if __name__ == "__main__":
     from key import privkeyfromrandom,privkeyfromstring
