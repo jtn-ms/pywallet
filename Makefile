@@ -52,3 +52,16 @@ broadcast.eth:
 # COSMOS OPERATION
 genkey.cosmos:
 	@python -c "from atom.key import genkey; print genkey('cosmos')"
+
+# DEBUG
+byte2img.eth:
+	@read -p "Type Hex String: " bytestr; \
+	 python -c "from utils.image import byte2img; byte2img('$$bytestr',filename='test.png',debug=True)"
+
+img2byte.eth:
+	@read -p "Type FilePath: " filename; \
+	 python -c "from utils.image import img2byte; img2byte('$$filename',debug=True)"
+
+compare.eth:
+	@python -c "from eth.key import privkeyfromrandom; keys=privkeyfromrandom();\
+				from utils.image import byte2img; byte2img(keys[0],debug=True);byte2img(keys[1],debug=True)"	
