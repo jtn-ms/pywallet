@@ -6,7 +6,7 @@ def byte2img(bytestr,filename=None,debug=False,grayscale=False):
     hexlen = len(bytestr)
     binlen = 4*hexlen
     binstr = bin(int(bytestr,16))[2:]
-    binstr = ''.join(['0']*(binlen-len(binstr))) + binstr
+    binstr = '0'*(binlen-len(binstr)) + binstr
     hexarr = np.uint8([int(byte,16)*16 for byte in bytestr])
     binarr = np.uint8([int(binary)*255 for binary in binstr])
     if len(bytestr) == 64:
