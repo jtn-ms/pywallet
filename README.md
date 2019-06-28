@@ -12,7 +12,8 @@
 ### Secret of Universe
     - Prime Numbers
     - Pi
-
+    - eYE
+    - braIN
 ## reference
 #### cosmos
     https://hub.cosmos.network/
