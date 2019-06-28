@@ -1,4 +1,4 @@
-clean:
+clean: clear
 	@find -name "*.log" -exec rm -f {} \;
 	@find -name "*.pyc" -exec rm -f {} \;
 	@find -name "*.png" -exec rm -f {} \;
@@ -7,6 +7,10 @@ clean:
 	@find -name .pytest_cache | xargs rm -rf
 	@find -name .cache | xargs rm -rf
 	@find -name dataset | xargs rm -rf
+
+clear:
+	@find -name keyimgs | xargs rm -rf
+	@mkdir keyimgs
 
 tar:
 	@tar cf $(CURDIR)/../test.tar.gz *

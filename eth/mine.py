@@ -2,7 +2,7 @@
 # strategy 1: random hunt
 # strategy 2: dictionary hunt(meaningful words or sentence)
 # strategy 3: dictionary hunt(meaningful image or mark) 
-# strategy 4: 
+# strategy 4: neural network based hunt(gan-crack AES)
 
 if __name__ == "__main__":
     from key import privkeyfromrandom,privkeyfromstring
