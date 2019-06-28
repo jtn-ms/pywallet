@@ -24,7 +24,16 @@ import os
 def img2byte(img,debug=False,grayscale=False):
     if isinstance(img,str):
         if not os.path.exists(img): return ""
+        filepath = img
         img = cv2.imread(img,cv2.IMREAD_GRAYSCALE)
+    rows,cols=img.shape[:2]
+    if rows != 16 or cols !=16:
+        img = cv2.resize(img, (16, 16))
+        _,img = cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+        dirpath,filename = os.path.split(filepath)
+        fn,ext = os.path.splitext(filename)
+        fullpath = os.path.join("keyimgs",fn.replace("Scrapper", "prvkey")+ext)
+        cv2.imwrite(fullpath,img)
     bytestr=""
     if grayscale:
         for byte in np.reshape(img,img.shape[0] * img.shape[1]): bytestr += hex(byte/16).replace("0x","").strip("L")
@@ -32,5 +41,15 @@ def img2byte(img,debug=False,grayscale=False):
         binstr=""
         for binary in np.reshape(img,img.shape[0] * img.shape[1]): binstr += "1" if binary > 0 else "0"
         bytestr = hex(int(binstr,2)).replace("0x","").strip("L")
-    if debug: print bytestr
+        bytestr = '0'*(64-len(bytestr)) + bytestr
+    if debug:
+        from eth.key import priv2addr; 
+        from eth.req import getbalance;
+        addr = priv2addr(bytestr)
+        print addr,bytestr,getbalance(addr)
     return bytestr
+
+def dataset2privkeys(fullpath,debug=True):
+    from os import listdir
+    from os.path import isfile, join
+    return [img2byte(join(fullpath, f),debug) for f in listdir(fullpath) if isfile(join(fullpath, f))]

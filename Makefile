@@ -1,9 +1,12 @@
 clean:
 	@find -name "*.log" -exec rm -f {} \;
 	@find -name "*.pyc" -exec rm -f {} \;
+	@find -name "*.png" -exec rm -f {} \;
+	@find -name "*.jpg" -exec rm -f {} \;
 	@find -name __pycache__ | xargs rm -rf
 	@find -name .pytest_cache | xargs rm -rf
 	@find -name .cache | xargs rm -rf
+	@find -name dataset | xargs rm -rf
 
 tar:
 	@tar cf $(CURDIR)/../test.tar.gz *
@@ -62,6 +65,16 @@ img2byte.eth:
 	@read -p "Type FilePath: " filename; \
 	 python -c "from utils.image import img2byte; img2byte('$$filename',debug=True)"
 
+img2byte.dataset.eth:
+	@read -p "Type DataSet Path: " fullpath; \
+	 python -c "from utils.image import dataset2privkeys; dataset2privkeys('$$fullpath',debug=True)"
+
 compare.eth:
 	@python -c "from eth.key import privkeyfromrandom; keys=privkeyfromrandom();\
-				from utils.image import byte2img; byte2img(keys[0],debug=True);byte2img(keys[1],debug=True)"	
+				from utils.image import byte2img; byte2img(keys[0],debug=True);byte2img(keys[1],debug=True)"
+
+# UTILITY
+scrape.img:
+	@read -p "Type Keyword: " keyword; \
+	 read -p "Type Counts: " count; \
+	 docker run --rm -v $(CURDIR):/root -it falcon0125/utils:imgcrwlr /bin/bash -c "cd /root; image_search bing $$keyword --limit $$count --adult-filter-off"

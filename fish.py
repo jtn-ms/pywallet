@@ -11,4 +11,4 @@ def primetry():
         Process(target=shot,args=(str(2**i-1),)).start()
         
 if __name__ == "__main__":
-    primetry()
+    randtry()
