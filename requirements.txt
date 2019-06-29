@@ -1,7 +1,8 @@
-ethereum==2.3.1
+py_ecc==1.4.1
+rlp==0.6.0
 eth-abi==1.0.0                   
 eth-hash==0.1.1                   
 eth-utils==1.0.3
 ethereum-serpent==2.0.4
 pyethash==0.1.27
-rlp==0.6.0
+ethereum==2.3.1
