@@ -21,6 +21,22 @@ def privkeyfromrandom():
     addr = privtoaddr(privkey)
     return addr.encode('hex'),privkey.encode('hex')
 
+def genkey(keystring=''):
+    return privkeyfromstring(keystring) if keystring else privkeyfromrandom()
+
+import multiprocessing
+from functools import partial
+def genkeys(count=10,filepath=None):
+    accs = []
+    pool = multiprocessing.Pool(multiprocessing.cpu_count())
+    outputs = pool.map(genkey,['']*count)
+    for output in outputs:
+        addr,privkey=output
+        accs.append('{0}\t{1}\n'.format(addr,privkey))
+    if filepath:
+        with open(filepath,'w') as file:
+            file.writelines(accs)
+            
 def priv2addr(privkey):
     return privtoaddr(decode_hex(privkey)).encode('hex')
 

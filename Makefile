@@ -85,3 +85,9 @@ scrape.img:
 	@read -p "Type Keyword: " keyword; \
 	 read -p "Type Counts: " count; \
 	 docker run --rm -v $(CURDIR):/root -it falcon0125/utils:imgcrwlr /bin/bash -c "cd /root; image_search bing $$keyword --limit $$count --adult-filter-off"
+# DATASET
+ACC_COUNT = 100000
+DATASET_PATH = dataset/100000.eth
+genkey2db.eth:
+	@if ! [ -d dataset ]; then mkdir dataset; fi
+	@python -c "from eth.key import genkeys; genkeys(${ACC_COUNT},'${DATASET_PATH}')";
