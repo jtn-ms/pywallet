@@ -60,6 +60,9 @@ broadcast.eth:
 genkey.cosmos:
 	@python -c "from atom.key import genkey; print genkey('cosmos')"
 
+priv2addr.cosmos:
+	@read -p "Type Private Key: " privkey; \
+	 python -c "from atom.key import privkey2addr; print privkey2addr('$$privkey')"
 # DEBUG
 byte2img.eth:
 	@read -p "Type Hex String: " bytestr; \

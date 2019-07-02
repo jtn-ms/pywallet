@@ -162,7 +162,7 @@ def privkey2pubkey(privKey):
         raise("array overindex")
         pass
 
-def genprivkey():
+def genprivkey(keystring=None):
     '''
     生成私钥, 使用 os.urandom (底层使用了操作系统的随机函数接口, 取决于CPU的性能,各种的硬件的数据指标)
     :return:私钥(16进制编码)
@@ -170,7 +170,8 @@ def genprivkey():
 
     #2019-05-15 添加私钥范围限制
     while True:
-        privKey = os.urandom(32).encode('hex')    #生成 256位 私钥
+        from ethereum.utils import sha3
+        privKey = sha3(keystring).encode('hex') if keystring else os.urandom(32).encode('hex')    #生成 256位 私钥
         if  g_nMinPrivKey < int(privKey, 16) <   g_nMaxPrivKey:
             return privKey
 
@@ -188,14 +189,14 @@ def privkey2addr(privKey, hrp='cosmos'):
     pubKey = privkey2pubkey(privKey)
     return pubKey,pubkey2addr(pubKey, hrp)
 
-def genkey(hrp='cosmos'):
+def genkey(hrp='cosmos',keystring=None):
     '''
     COSMOS 生成地址
     :return: (privkey, pubKey, addr)
     '''
 
     #生成私钥
-    privKey = genprivkey()
+    privKey = genprivkey(keystring)
     #私钥-->公钥
     pubKey = privkey2pubkey(privKey)
     #公钥-->地址
