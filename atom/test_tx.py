@@ -5,7 +5,7 @@ import hashlib
 import coincurve
 import base64
 import requests
-import py.test
+# import py.test
 
 from atom.tx import accountinfo,transfer
 
