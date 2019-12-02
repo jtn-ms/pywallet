@@ -31,7 +31,7 @@ def img2byte(img,debug=False,grayscale=False):
         img = cv2.resize(img, (16, 16))
         #_,img = cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
         img = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 115, 1)
-        dirpath,filename = os.path.split(filepath)
+        _,filename = os.path.split(filepath)
         fn,ext = os.path.splitext(filename)
         fullpath = os.path.join("keyimgs",fn.replace("Scrapper", "prvkey")+ext)
         cv2.imwrite(fullpath,img)
@@ -45,8 +45,8 @@ def img2byte(img,debug=False,grayscale=False):
         bytestr = '0'*(64-len(bytestr)) + bytestr
     if bytestr == '0' * 64: bytestr = '1'*64
     if debug:
-        from eth.key import priv2addr; 
-        from eth.req import getbalance;
+        from eth.key import priv2addr
+        from eth.req import getbalance
         addr = priv2addr(bytestr)
         print addr,bytestr,getbalance(addr)
     return bytestr

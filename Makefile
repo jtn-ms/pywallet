@@ -25,13 +25,16 @@ stop.all:
 genkey.eth:
 	@read -p "Type Key String: " seed; \
 	 python -c "from eth.key import privkeyfromstring; print privkeyfromstring('$$seed')"
+	@$(MAKE) -sC . clean
 
 genkey.rand.eth:
 	@python -c "from eth.key import privkeyfromrandom; print privkeyfromrandom()"
+	@$(MAKE) -sC . clean
 
 chkacc.eth:
 	@read -p "Type Address: " address; \
-	 python -c "from eth.req import getbalance; print getbalance('$$address')"	
+	 python -c "from eth.req import getbalance; print getbalance('$$address')"
+	@$(MAKE) -sC . clean
 
 chknonce.eth:
 	@read -p "Type Address: " address; \
