@@ -11,7 +11,12 @@ from rlp.utils import decode_hex,encode_hex
 
 def privkeyfromstring(string='dog'):
     privkey = sha3(string)
-    pubkey = privtopub(privkey)
+    # pubkey = privtopub(privkey)
+    addr = privtoaddr(privkey)
+    return encode_hex(addr),encode_hex(privkey)
+
+def privkeyfromint(value):
+    privkey = sha3(value)
     addr = privtoaddr(privkey)
     return encode_hex(addr),encode_hex(privkey)
 

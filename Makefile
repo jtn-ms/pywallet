@@ -27,6 +27,11 @@ genkey.eth:
 	 python -c "from eth.key import privkeyfromstring; print privkeyfromstring('$$seed')"
 	@$(MAKE) -sC . clean
 
+genkey.eth.int:
+	@read -p "Type Key Int: " seed; \
+	 python -c "from eth.key import privkeyfromint; print privkeyfromint($$seed)"
+	@$(MAKE) -sC . clean
+
 genkey.rand.eth:
 	@python -c "from eth.key import privkeyfromrandom; print privkeyfromrandom()"
 	@$(MAKE) -sC . clean
