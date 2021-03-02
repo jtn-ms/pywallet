@@ -19,26 +19,56 @@
 import requests
 import json
 
+signed_url = "https://mainnet.infura.io/v3/09af14756ba347898112f3b8259e9e6e"
+
 def str2dict(string):
     json_acceptable_string = string.replace("'", "\"")
     return json.loads(json_acceptable_string)
 
+skey = '"result":"'
+ekey = '"'
+
+def extractResult(content):
+    sidx,eidx=-1,-1
+
+    try:
+        sidx = content.index(skey) + len(skey)
+    except:
+        sidx = -2
+
+    if sidx > 0:
+        try:
+            eidx = content[sidx:].index(ekey)
+        except:
+            eidx = -2
+        if eidx > 0:
+            return content[sidx:sidx+eidx]
+    return ""
+
+# ('HTTP/1.1 200 OK\r\nDate: Tue, 02 Mar 2021 10:10:34 GMT\r\nContent-Type: application/json\r\nContent-Length: 54\r\nConnection: keep-alive\r\nVary: Origin\r\n\r\n{"jsonrpc":"2.0","id":1,"result":"0x773da15214bb8c00"}', <type 'str'>)
+# https://medium.com/@piyopiyo/how-to-get-ethereum-balance-with-json-rpc-api-provided-by-infura-io-6e5d22d25927
 def getbalance(address):
     address = "0x%s"%address if not address.startswith("0x") else address
     try:
-        url = 'https://api.infura.io/v1/jsonrpc/mainnet/eth_getBalance?params=%5B%22{0}%22%2C%22latest%22%5D'.format(address)
+        params = { "jsonrpc":"2.0",
+                   "method":"eth_getBalance",
+                   "params":[address,"latest"],
+                   "id":1}
+        
+        cmd = "curl -i -X POST -H 'Content-Type: application/json' --data '{0}' {1}".format(str(params).replace("'", '"'),signed_url)
         # print address
-        res = requests.get(url)
-        if res.status_code != 200:
+        import subprocess
+        res = subprocess.check_output(cmd,shell=True)
+        if "result" not in res:
             return 0
-        balance = str2dict(res.text)["result"]
+        balance = extractResult(res)
         return int(balance,16)/float(10**18)
     except Exception as e: return 0
 
 def getnonce(address):
     address = "0x%s"%address if not address.startswith("0x") else address
     try:
-        url = 'https://api.infura.io/v1/jsonrpc/mainnet/eth_getTransactionCount?params=%5B%22{0}%22%2C%22latest%22%5D'.format(address)
+        url = '{0}/eth_getTransactionCount?params=%5B%22{1}%22%2C%22latest%22%5D'.format(signed_url,address)
         # print address
         res = requests.get(url)
         if res.status_code != 200:
@@ -50,14 +80,13 @@ def getnonce(address):
 def sendrawtransaction(signed):
     signed = "0x%s"%signed if not signed.startswith("0x") else signed
     try:
-        url = 'https://api.infura.io/v1/jsonrpc/mainnet'
         params = {
                     "id": 1337,
                     "jsonrpc": "2.0",
                     "method": "eth_sendRawTransaction",
                     "params": [signed]
                 }
-        cmd = "curl -sX POST --data '{0}' {1}".format(str(params).replace("'", '"'),url)
+        cmd = "curl -sX POST --data '{0}' {1}".format(str(params).replace("'", '"'),signed_url)
         # res = requests.post(url,json=json.dumps(params))
         # print res.text
         # if res.status_code != 200:
