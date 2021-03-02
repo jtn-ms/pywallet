@@ -38,3 +38,8 @@
     https://github.com/rushilsrivastava/image_search
 #### T
     https://etherscan.io/address/0xddfd7f68662bef333bb7891580948e83dcd3c988
+#### REST API
+```
+[eth_call]
+curl -X POST -H 'content-type: application/json;' --data-binary '{"jsonrpc":"2.0","method":"eth_call","params":[{"from": "0x8aff0a12f3e8d55cc718d36f84e002c335df2f4a", "to": "0x1d3B2638a7cC9f2CB3D298A3DA7a90B67E5506ed", "data": "0x38cc4831"}, "latest"],"id":1}' http://192.168.10.199:8545
+```
