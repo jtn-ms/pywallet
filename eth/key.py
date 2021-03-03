@@ -68,5 +68,4 @@ def makekeyfile(passwd):
     return priv,encrypted
 
 if __name__ == "__main__":
-    print(privkeyfromstring())
-    print(privkeyfromrandom())
+    decryptkeyfile()

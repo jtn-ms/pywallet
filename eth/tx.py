@@ -23,6 +23,7 @@ def create(nonce, to, value, data="", gasprice=10*10**9, startgas=21000):
 def createEx(fromaddr, to, value, data="", gasprice=10*10**9, startgas=21000):
     from eth.req import getnonce
     nonce = getnonce(fromaddr)
+    print  "nonce--{0}".format(nonce)
     value_ = int(value*10**18) if isinstance(value,float) or value < 10 else int(value)
     from rlp.utils import encode_hex,decode_hex
     to_ = decode_hex(to[2:]) if isinstance(to,str) and to.startswith('0x') else decode_hex(to)
@@ -44,3 +45,13 @@ def sign(key,data):
 def broadcast(signed):
     from eth.req import sendrawtransaction
     return sendrawtransaction(signed)
+
+def transfer(fromprivkey, to, value, data="", gasprice=90*10**9, startgas=21000):
+    from .key import priv2addr
+    fromaddr = priv2addr(fromprivkey)
+    print "fromaddr--{0}".format(fromaddr)
+    rawtx = createEx(fromaddr, to, value,data="", gasprice=gasprice)
+    print "unsigned--{0}".format(rawtx)
+    signedTx = sign(fromprivkey,rawtx)
+    print "signed--{0}".format(signedTx)
+    print "txhash--{0}".format(broadcast(signedTx))

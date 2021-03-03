@@ -25,10 +25,7 @@ def str2dict(string):
     json_acceptable_string = string.replace("'", "\"")
     return json.loads(json_acceptable_string)
 
-skey = '"result":"'
-ekey = '"'
-
-def extractResult(content):
+def extractResult(content,skey='"result":"',ekey='"'):
     sidx,eidx=-1,-1
 
     try:
@@ -45,6 +42,13 @@ def extractResult(content):
             return content[sidx:sidx+eidx]
     return ""
 
+def rpc_call(params):
+    cmd = "curl -i -X POST -H 'Content-Type: application/json' --data '{0}' {1}".format(str(params).replace("'", '"'),signed_url)
+    print cmd
+    # print address
+    import subprocess
+    return subprocess.check_output(cmd,shell=True)
+
 # ('HTTP/1.1 200 OK\r\nDate: Tue, 02 Mar 2021 10:10:34 GMT\r\nContent-Type: application/json\r\nContent-Length: 54\r\nConnection: keep-alive\r\nVary: Origin\r\n\r\n{"jsonrpc":"2.0","id":1,"result":"0x773da15214bb8c00"}', <type 'str'>)
 # https://medium.com/@piyopiyo/how-to-get-ethereum-balance-with-json-rpc-api-provided-by-infura-io-6e5d22d25927
 def getbalance(address):
@@ -55,12 +59,9 @@ def getbalance(address):
                    "params":[address,"latest"],
                    "id":1}
         
-        cmd = "curl -i -X POST -H 'Content-Type: application/json' --data '{0}' {1}".format(str(params).replace("'", '"'),signed_url)
-        # print address
-        import subprocess
-        res = subprocess.check_output(cmd,shell=True)
+        res = rpc_call(params)
         if "result" not in res:
-            return 0
+            return res
         balance = extractResult(res)
         return int(balance,16)/float(10**18)
     except Exception as e: return 0
@@ -68,12 +69,15 @@ def getbalance(address):
 def getnonce(address):
     address = "0x%s"%address if not address.startswith("0x") else address
     try:
-        url = '{0}/eth_getTransactionCount?params=%5B%22{1}%22%2C%22latest%22%5D'.format(signed_url,address)
-        # print address
-        res = requests.get(url)
-        if res.status_code != 200:
+        params = { "jsonrpc":"2.0",
+                   "method":"eth_getTransactionCount",
+                   "params":[address,"latest"],
+                   "id":1}
+        
+        res = rpc_call(params)
+        if "result" not in res:
             return 0
-        nonce = str2dict(res.text)["result"]
+        nonce = extractResult(res)
         return int(nonce,16)
     except Exception as e: return 0
     
@@ -81,20 +85,17 @@ def sendrawtransaction(signed):
     signed = "0x%s"%signed if not signed.startswith("0x") else signed
     try:
         params = {
-                    "id": 1337,
+                    "id": 1,
                     "jsonrpc": "2.0",
                     "method": "eth_sendRawTransaction",
                     "params": [signed]
                 }
-        cmd = "curl -sX POST --data '{0}' {1}".format(str(params).replace("'", '"'),signed_url)
-        # res = requests.post(url,json=json.dumps(params))
-        # print res.text
-        # if res.status_code != 200:
-        #     return False
-        # return str2dict(res.text)["result"]
-        import subprocess
-        return subprocess.check_output(cmd,shell=True)
-    except Exception as e: return False
+        
+        res = rpc_call(params)
+        if "result" not in res:
+            returnextractResult(res)
+        return extractResult(res,'"message":"')
+    except Exception as e: return ""
 
 if __name__ == "__main__":
     print getbalance("0xfac648c71eae43c518bc6676eb29ebb448d6e794")

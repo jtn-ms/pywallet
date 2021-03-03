@@ -64,6 +64,11 @@ broadcast.eth:
 	@read -p "Type Signed Transaction: " signed; \
 	 python -c "from eth.tx import broadcast; print broadcast('$$signed')"
 
+transfer.eth:
+	@read -p "Type From PrivKey: " fromprivkey; \
+     read -p "Type To Address: " toaddr; \
+	 read -p "Type Value: " value; \
+	 python -c "from eth.tx import transfer; transfer('$$fromprivkey','$$toaddr',$$value);"
 # COSMOS OPERATION
 genkey.cosmos:
 	@python -c "from atom.key import genkey; print genkey('cosmos')"
