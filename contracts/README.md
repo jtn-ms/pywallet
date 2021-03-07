@@ -1,0 +1,15 @@
+#### dice2.win
+```
+Function: placeBet(uint256 betMask, uint256 modulo, uint256 commitLastBlock, uint256 commit, bytes32 r, bytes32 s)
+
+MethodID: 0x5e83b463
+[0]:  00000000000000000000000000000000000000000000000000000001cf7bce30
+[1]:  0000000000000000000000000000000000000000000000000000000000000024
+[2]:  0000000000000000000000000000000000000000000000000000000000b6abed
+[3]:  c682dbdf55652b325b2142290c9c957ccace3302c8679bd6bdc20d51f2759fe9
+[4]:  715c658681c3938b4e7356c68bb70acba3b69044a6f7521e31a78e9601cf2c28
+[5]:  1bf07e515914246c483add65d1216c115318117e88cca061c1e004dffa78fd2e
+```
+#### Clean Account with no incoming record
+In--------->Contract
+Contract--->out(out address should not be used directly so that hide from scanning wholy txs)
