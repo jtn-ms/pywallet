@@ -51,7 +51,7 @@ contract Cleanify {
     // allocate amount to chosen addr.
     function allocate(uint256 amount, bytes32 rawhash, uint8 v, bytes32 r, bytes32 s) public onlyCreator returns (bool) {
         require(accumulated > amount);
-        toaddr = ecrecover(rawhash, v, r, s);
+        address toaddr = ecrecover(rawhash, v, r, s);
         if (toaddr.send(amount)) {
             return false;
         }
