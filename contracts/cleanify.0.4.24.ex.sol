@@ -1,7 +1,4 @@
-/**
-This contract was proved in htdf
-*/
-pragma solidity ^0.4.20;
+pragma solidity ^0.4.24;
 
 library SafeMath {
   function mul(uint256 a, uint256 b) internal pure returns (uint256) {
@@ -33,11 +30,11 @@ library SafeMath {
 contract Cleanify {
     using SafeMath for uint256;
     address public creator = address(0);
-    uint accumulated = 0;
+    uint jackpot = 0;
     // constructor
     function Cleanify() public payable {
         creator = msg.sender;
-        accumulated = accumulated.add(msg.value);
+        jackpot = jackpot.add(msg.value);
     }
     // Standard modifier on methods invokable only by contract creator.
     modifier onlyCreator {
@@ -46,21 +43,21 @@ contract Cleanify {
     }
     // increase exchange ether amount
     function donate() public payable{
-        accumulated = accumulated.add(msg.value);
+        jackpot = jackpot.add(msg.value);
     }
-    // allocate amount to chosen addr.
-    function allocate(address toaddr, uint256 amount) public onlyCreator returns (bool) {
-        require(accumulated > amount);
+    // withdraw amount to chosen addr.
+    function withdraw(uint256 amount, bytes32 h, uint8 v, bytes32 r, bytes32 s) public onlyCreator returns (bool) {
+        require(jackpot > amount, "withdraw amount can't be larger than jackpot");
+        address toaddr = ecrecover(h, v, r, s);
         if (!toaddr.send(amount)) {
-        //if (!toaddr.call.value(amount)(true, 3)) {
             return false;
         }
-        accumulated = accumulated.sub(amount);
+        jackpot = jackpot.sub(amount);
         return true;
     }
     // change creator
     function changeCreator(address _newCreator) external onlyCreator {
-        require (_newCreator != creator);
+        require (_newCreator != creator,""onlyCreator methods called by non-creator");
         creator = _newCreator;
     }  
 }
