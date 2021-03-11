@@ -46,7 +46,7 @@ def broadcast(signed):
     from eth.req import sendrawtransaction
     return sendrawtransaction(signed)
 
-def transfer(fromprivkey, to, value, data="", gasprice=90*10**9, startgas=21000):
+def transfer(fromprivkey, to, value, data="", gasprice=125*10**9, startgas=21000):
     from .key import priv2addr
     fromaddr = priv2addr(fromprivkey)
     print "fromaddr--{0}".format(fromaddr)

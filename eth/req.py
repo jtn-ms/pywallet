@@ -43,7 +43,9 @@ def extractResult(content,skey='"result":"',ekey='"'):
     return ""
 
 def rpc_call(params):
-    cmd = "curl -i -X POST -H 'Content-Type: application/json' --data '{0}' {1}".format(str(params).replace("'", '"'),signed_url)
+    if isinstance(params,dict):
+        params = str(params).replace("'", '"')
+    cmd = "curl -i -X POST -H 'Content-Type: application/json' --data '{0}' {1}".format(params,signed_url)
     print cmd
     # print address
     import subprocess
@@ -66,6 +68,32 @@ def getbalance(address):
         return int(balance,16)/float(10**18)
     except Exception as e: return 0
 
+def getblock(blknum):
+    blknum = hex(blknum) if isinstance(blknum,int) else blknum
+    blknum = "0x%s"%blknum if not blknum.startswith("0x") \
+                              and blknum != "latest" else blknum
+    if blknum != "latest":
+        try:
+            int(blknum,16)
+        except Exception as e: return ''
+    try:
+        params = '{ "jsonrpc":"2.0", \
+                    "method":"eth_getBlockByNumber", \
+                    "params":["%s",false],\
+                    "id":1}'%blknum
+        params=params.replace(" ",'')
+        res = rpc_call(params)
+        if "result" not in res:
+            return ''
+        return res
+    except Exception as e: return ''
+
+def getblockHashByNumber(blknum):
+    blkres = getblock(blknum)
+    if blkres == '':
+        return ''
+    return extractResult(blkres,skey='"hash":"',ekey='"')
+
 def getnonce(address):
     address = "0x%s"%address if not address.startswith("0x") else address
     try:
@@ -80,7 +108,7 @@ def getnonce(address):
         nonce = extractResult(res)
         return int(nonce,16)
     except Exception as e: return 0
-    
+
 def sendrawtransaction(signed):
     signed = "0x%s"%signed if not signed.startswith("0x") else signed
     try:
@@ -93,9 +121,10 @@ def sendrawtransaction(signed):
         
         res = rpc_call(params)
         if "result" not in res:
-            returnextractResult(res)
+            return extractResult(res)
         return extractResult(res,'"message":"')
     except Exception as e: return ""
 
 if __name__ == "__main__":
-    print getbalance("0xfac648c71eae43c518bc6676eb29ebb448d6e794")
+    print(getblockHashByNumber(111))
+    # print getbalance("0xddfd7f68662bef333bb7891580948e83dcd3c988")
