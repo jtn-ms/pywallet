@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# BLOCK HASH IS KINDS OF RANDOM NUMBER, UNPREDICTABLE
+# REVEAL IS HASH OF HASH, MAYBE TIME_BASED ALSO UNPREDICTABLE
+# USE BEGINNER'S LUCK
 MAX_MASK_MODULO = 100#dice:6, coin flip:2
 MAX_BET_MASK = 2 ** MAX_MASK_MODULO
 POPCNT_MULT = int("0000000000002000000000100000000008000000000400000000020000000001",16)
@@ -52,9 +55,9 @@ def commitBet(amount,mask,modulo,blkhash,reveal):
     assert amount > MIN_BET and  amount < MAX_AMOUNT
     assert mask > 0 and mask < MAX_BET_MASK
     rollUnder=((mask*POPCNT_MULT)&POPCNT_MASK) % POPCNT_MODULO
-    print("rollUnder: {0}".format(rollUnder))
+    # print("rollUnder: {0}".format(rollUnder))
     diceWinAmount,jackpotFee = getDiceWinAmount(amount, modulo, rollUnder)
-    print("diceWinAmount: {0},jackpotFee: {1}".format(diceWinAmount,jackpotFee))
+    # print("diceWinAmount: {0},jackpotFee: {1}".format(diceWinAmount,jackpotFee))
     # settleBet, settleBetCommon
     dice = roll(modulo,reveal,blkhash)
     isWin=determine(modulo,dice,mask,rollUnder)
@@ -68,17 +71,19 @@ def roll(modulo,reveal,blkhash):
     from sha3 import keccak_256
     from ethereum.abi import encode_single,encode_abi
     encoded = encode_abi(('uint256','bytes32'),(long(reveal,16),blkhash.decode("hex")))
-    print("encoded: {0}".format(encoded.encode('hex')))
+    # print("encoded: {0}".format(encoded.encode('hex')))
     entropy=keccak_256(encoded).hexdigest()
-    print("entropy: {0}".format(entropy))
+    # print("entropy: {0}".format(entropy))
     dice = int(entropy,16) % modulo
-    print("dice: {0}".format(dice))
+    # print("dice: {0}/0~5".format(dice))
     return dice
 
 def determine(modulo,dice,mask,rollUnder):
     if modulo <= MAX_MASK_MODULO:
-        print("2**dice:{0}".format(2**dice))
-        print("mask:   {0}".format(mask))
+        binbet =bin(mask)[2:]
+        bindice=bin(2**dice)[2:]
+        print("your bet:{0}-{1}".format((modulo-len(bindice))*'0'+bindice,\
+                                        (modulo-len(binbet))*'0'+binbet))
         if ((2 ** dice) & mask) != 0:
             return True
     elif dice < rollUnder:
@@ -132,6 +137,7 @@ def genMask(modulo):
 # modulo = "0000000000000000000000000000000000000000000000000000000000000006"
 def simOne(mask="000111"):
     # blkhash
+    print("#"*50)
     from req_etherscan import getBlockHash
     pblknum,blkhash=getBlockHash("latest")
     assert blkhash != ''
