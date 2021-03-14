@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import json
 
 # import web3
@@ -16,9 +16,9 @@ def getblockHashByNumber(blknum):
     # from ethereum.pow.chain import get_blockhash_by_number
     # blkhash = get_blockhash_by_number(blknum)
     blk = w3.eth.get_block(blknum)
-    print(blk)
     bhash = blk['hash']
-    return bhash.hex()
+    bnumber = blk['number']
+    return int(bnumber),bhash.hex()
 
 if __name__ == "__main__":
     print(getblockHashByNumber('latest'))

@@ -17,30 +17,10 @@
 # https://api.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex=0xf904808000831cfde080&apikey=YourApiKeyToken
 
 import requests
-import json
 
 signed_url = "https://mainnet.infura.io/v3/09af14756ba347898112f3b8259e9e6e"
 
-def str2dict(string):
-    json_acceptable_string = string.replace("'", "\"")
-    return json.loads(json_acceptable_string)
-
-def extractResult(content,skey='"result":"',ekey='"'):
-    sidx,eidx=-1,-1
-
-    try:
-        sidx = content.index(skey) + len(skey)
-    except:
-        sidx = -2
-
-    if sidx > 0:
-        try:
-            eidx = content[sidx:].index(ekey)
-        except:
-            eidx = -2
-        if eidx > 0:
-            return content[sidx:sidx+eidx]
-    return ""
+from req_util import str2dict,extractResult
 
 def rpc_call(params):
     if isinstance(params,dict):
@@ -85,14 +65,18 @@ def getblock(blknum):
         res = rpc_call(params)
         if "result" not in res:
             return ''
-        return res
-    except Exception as e: return ''
+        result = extractResult(res,skey='"result":',ekey='}')+"}"
+        print(result,type(result))
+        return str2dict(result)
+    except Exception as e: print(e);return ''
 
 def getblockHashByNumber(blknum):
     blkres = getblock(blknum)
     if blkres == '':
         return ''
-    return extractResult(blkres,skey='"hash":"',ekey='"')
+    blknum = blkres[unicode('number')].encode('ascii','ignore')
+    blkhash = blkres[unicode('hash')].encode('ascii','ignore')
+    return int(blknum,16),blkhash
 
 def getnonce(address):
     address = "0x%s"%address if not address.startswith("0x") else address
@@ -126,5 +110,5 @@ def sendrawtransaction(signed):
     except Exception as e: return ""
 
 if __name__ == "__main__":
-    print(getblockHashByNumber(111))
+    print(getblockHashByNumber("latest"))
     # print getbalance("0xddfd7f68662bef333bb7891580948e83dcd3c988")
