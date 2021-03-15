@@ -1,8 +1,11 @@
 #!/usr/bin/env python
-
+from __future__ import absolute_import
+# [PROBLEM]
 # BLOCK HASH IS KINDS OF RANDOM NUMBER, UNPREDICTABLE
 # REVEAL IS HASH OF HASH, MAYBE TIME_BASED ALSO UNPREDICTABLE
+# [SOLUTION]
 # USE BEGINNER'S LUCK
+# DEAL WITH DEVIL
 MAX_MASK_MODULO = 100#dice:6, coin flip:2
 MAX_BET_MASK = 2 ** MAX_MASK_MODULO
 POPCNT_MULT = int("0000000000002000000000100000000008000000000400000000020000000001",16)
@@ -135,10 +138,13 @@ def genMask(modulo):
 
 # mask   = "000000000000000000000000000000000000000000000000000000000000000f"
 # modulo = "0000000000000000000000000000000000000000000000000000000000000006"
+try:
+    from eth.etherscan import getBlockHash
+except:
+    from etherscan import getBlockHash
 def simOne(mask="000111"):
     # blkhash
     print("#"*50)
-    from req_etherscan import getBlockHash
     pblknum,blkhash=getBlockHash("latest")
     assert blkhash != ''
     blkhash = blkhash[2:] if '0x' in blkhash else blkhash

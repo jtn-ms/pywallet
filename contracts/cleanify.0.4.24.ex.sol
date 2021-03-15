@@ -32,13 +32,13 @@ contract Cleanify {
     address public creator = address(0);
     uint jackpot = 0;
     // constructor
-    function Cleanify() public payable {
+    constructor () public payable {
         creator = msg.sender;
         jackpot = jackpot.add(msg.value);
     }
     // Standard modifier on methods invokable only by contract creator.
     modifier onlyCreator {
-        require (msg.sender == creator);
+        require (msg.sender == creator,"onlyCreator methods called by non-creator");
         _;
     }
     // increase exchange ether amount
@@ -57,7 +57,6 @@ contract Cleanify {
     }
     // change creator
     function changeCreator(address _newCreator) external onlyCreator {
-        require (_newCreator != creator,""onlyCreator methods called by non-creator");
         creator = _newCreator;
     }  
 }

@@ -69,6 +69,21 @@ transfer.eth:
      read -p "Type To Address: " toaddr; \
 	 read -p "Type Value: " value; \
 	 python -c "from eth.tx import transfer; transfer('$$fromprivkey','$$toaddr',$$value);"
+
+calc.intrinsic.gas:
+	@read -p "Type From PrivKey: " fromprivkey; \
+     read -p "Type To Address: " toaddr; \
+	 read -p "Type Value: " value; \
+	 read -p "Type Data: " data; \
+	 python -c "from eth.tx import intrinsic_gas; intrinsic_gas('$$fromprivkey','$$toaddr','$$value','$$data');"	
+
+create.contract.eth:
+	@read -p "Type From PrivKey: " fromprivkey; \
+     read -p "Type To Address: " toaddr; \
+	 read -p "Type Value: " value; \
+	 read -p "Type Data: " data; \
+	 python -c "from eth.tx import transfer; transfer('$$fromprivkey','$$toaddr','$$value','$$data');"
+	 
 # COSMOS OPERATION
 genkey.cosmos:
 	@python -c "from atom.key import genkey; print genkey('cosmos')"

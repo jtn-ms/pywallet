@@ -32,16 +32,16 @@ library SafeMath {
 
 contract Cleanify {
     using SafeMath for uint256;
-    address public creator = address(0);
+    address public owner = address(0);
     uint accumulated = 0;
     // constructor
-    function Cleanify() public payable {
-        creator = msg.sender;
+    constructor () public payable {
+        owner = msg.sender;
         accumulated = accumulated.add(msg.value);
     }
-    // Standard modifier on methods invokable only by contract creator.
-    modifier onlyCreator {
-        require (msg.sender == creator);//, "OnlyCreator methods called by non-creator.");
+    // Standard modifier on methods invokable only by contract owner.
+    modifier onlyOwner {
+        require (msg.sender == owner, "onlyOwner methods called by non-owner.");
         _;
     }
     // increase exchange ether amount
@@ -49,7 +49,7 @@ contract Cleanify {
         accumulated = accumulated.add(msg.value);
     }
     // allocate amount to chosen addr.
-    function allocate(address toaddr, uint256 amount) public external onlyCreator returns (bool) {
+    function allocate(address toaddr, uint256 amount) public external onlyOwner returns (bool) {
         require(accumulated > amount, "The request amount is unaffordable.");
         // transfer amount to chosen addr
         if (toaddr.send(amount)) { //sol-0.4.24
@@ -58,9 +58,8 @@ contract Cleanify {
         accumulated = accumulated.sub(amount);
         return true;
     }
-    // change creator
-    function changeCreator(address _newCreator) public external onlyCreator {
-        require (_newCreator != creator, "Cannot approve current creator.");
-        creator = _newCreator;
+    // change owner
+    function changeOwner(address _newOwner) external onlyOwner {
+        owner = _newOwner;
     }  
 }

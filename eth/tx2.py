@@ -42,10 +42,10 @@ class MyTransaction(ethereum.transactions.Transaction):
 
 def main():
     nonce = 21
-    gasprice = 18000000000
+    gasprice = 125*10**9
     startgas = 100000
-    to = '0xa593094cebb06bf34df7311845c2a34996b52324'
-    value = 1000000000000
+    to = ''
+    value = int(0.02 * 10**18)
     data = ''
     sender = "0xc6f4f527587ea4a03aa85e0322783592367c1b9a"
     r = "0xab90122dc4e4bbdbb14ef22ad3ae21aecc19a1c90a9c8989c68b26cc782ff303"

@@ -20,15 +20,29 @@ def create(nonce, to, value, data="", gasprice=10*10**9, startgas=21000):
     rlp_data = rawTransaction.unsigned
     return encode_hex(rlp_data)
 
-def createEx(fromaddr, to, value, data="", gasprice=10*10**9, startgas=21000):
-    from eth.req import getnonce
+def intrinsic_gas(fromaddr, to, value, data="", gasprice=10*10**9, startgas=21000):
+    from eth.req_infura import getnonce
     nonce = getnonce(fromaddr)
     print  "nonce--{0}".format(nonce)
+    value = 0.0 if value == '' else float(value)
     value_ = int(value*10**18) if isinstance(value,float) or value < 10 else int(value)
     from rlp.utils import encode_hex,decode_hex
     to_ = decode_hex(to[2:]) if isinstance(to,str) and to.startswith('0x') else decode_hex(to)
     data_ = decode_hex(data)
     rawTransaction = TransactionEx(nonce, gasprice, startgas, to_, value_, data_)
+    print("intrinsic gas: {0}".format(rawTransaction.intrinsic_gas_used))
+
+def createEx(fromaddr, to, value, data="", gasprice=10*10**9, startgas=21000):
+    from eth.req_infura import getnonce
+    nonce = getnonce(fromaddr)
+    print  "nonce--{0}".format(nonce)
+
+    value_ = int(value*10**18) if isinstance(value,float) or value < 10 else int(value)
+    from rlp.utils import encode_hex,decode_hex
+    to_ = decode_hex(to[2:]) if isinstance(to,str) and to.startswith('0x') else decode_hex(to)
+    data_ = decode_hex(data)
+    rawTransaction = TransactionEx(nonce, gasprice, startgas, to_, value_, data_)
+    assert rawTransaction.intrinsic_gas_used < startgas
     rlp_data = rawTransaction.unsigned
     return encode_hex(rlp_data)
 
@@ -43,14 +57,15 @@ def sign(key,data):
     return encode_hex(signed_rlp)
 
 def broadcast(signed):
-    from eth.req import sendrawtransaction
+    from eth.req_infura import sendrawtransaction
     return sendrawtransaction(signed)
 
 def transfer(fromprivkey, to, value, data="", gasprice=125*10**9, startgas=21000):
     from .key import priv2addr
     fromaddr = priv2addr(fromprivkey)
     print "fromaddr--{0}".format(fromaddr)
-    rawtx = createEx(fromaddr, to, value,data="", gasprice=gasprice)
+    value = 0 if value == '' else float(value)
+    rawtx = createEx(fromaddr, to, value,data=data, gasprice=gasprice, startgas=startgas)
     print "unsigned--{0}".format(rawtx)
     signedTx = sign(fromprivkey,rawtx)
     print "signed--{0}".format(signedTx)
