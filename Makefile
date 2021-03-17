@@ -38,7 +38,7 @@ genkey.rand.eth:
 
 chkacc.eth:
 	@read -p "Type Address: " address; \
-	 python -c "from eth.req import getbalance; print getbalance('$$address')"
+	 python -c "from eth.req import getBalance; print getBalance('$$address')"
 	@$(MAKE) -sC . clean
 
 chknonce.eth:

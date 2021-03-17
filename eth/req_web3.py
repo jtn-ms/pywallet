@@ -20,5 +20,9 @@ def getblockHashByNumber(blknum):
     bnumber = blk['number']
     return int(bnumber),bhash.hex()
 
+def getBalance(address):
+    return w3.eth.getBalance(Web3.toChecksumAddress(address))
+
 if __name__ == "__main__":
-    print(getblockHashByNumber('latest'))
+    # print(getblockHashByNumber('latest'))
+    print(getBalance("0xd1ceeeeee83f8bcf3bedad437202b6154e9f5405"))

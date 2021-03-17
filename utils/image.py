@@ -46,9 +46,9 @@ def img2byte(img,debug=False,grayscale=False):
     if bytestr == '0' * 64: bytestr = '1'*64
     if debug:
         from eth.key import priv2addr
-        from eth.req import getbalance
+        from eth.req import getBalance
         addr = priv2addr(bytestr)
-        print addr,bytestr,getbalance(addr)
+        print addr,bytestr,getBalance(addr)
     return bytestr
 
 def dataset2privkeys(fullpath,debug=True):

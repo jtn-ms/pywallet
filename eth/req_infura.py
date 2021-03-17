@@ -33,7 +33,7 @@ def rpc_call(params):
 
 # ('HTTP/1.1 200 OK\r\nDate: Tue, 02 Mar 2021 10:10:34 GMT\r\nContent-Type: application/json\r\nContent-Length: 54\r\nConnection: keep-alive\r\nVary: Origin\r\n\r\n{"jsonrpc":"2.0","id":1,"result":"0x773da15214bb8c00"}', <type 'str'>)
 # https://medium.com/@piyopiyo/how-to-get-ethereum-balance-with-json-rpc-api-provided-by-infura-io-6e5d22d25927
-def getbalance(address):
+def getBalance(address):
     address = "0x%s"%address if not address.startswith("0x") else address
     try:
         params = { "jsonrpc":"2.0",
@@ -111,4 +111,4 @@ def sendrawtransaction(signed):
 
 if __name__ == "__main__":
     print(getblockHashByNumber("latest"))
-    # print getbalance("0xddfd7f68662bef333bb7891580948e83dcd3c988")
+    # print getBalance("0xddfd7f68662bef333bb7891580948e83dcd3c988")

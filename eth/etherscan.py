@@ -20,7 +20,7 @@ def getBalance(address):
         res = requests.get(url)
         if res.status_code != 200:
             return 0
-        print(res.text)
+        # print(res.text)
         balance = str2dict(res.text)["result"]
         return int(balance)
     except Exception as e: return 0
@@ -56,6 +56,6 @@ def getBlockHash(blkum):
     return int(blknum,16),blkhash
 
 if __name__ == "__main__":
-    # getBalance("0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae")
+    print(getBalance("0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae"))
     # getBlock("latest")
-    print(getBlockHash("latest"))
+    # print(getBlockHash("latest"))

@@ -1,5 +1,5 @@
 from os import walk
-from eth.req import getbalance
+from eth.req import getBalance
 
 _, _, filenames = next(walk("tmp"))
 
@@ -14,7 +14,7 @@ for filename in filenames:
         sidx = -2
     if sidx < 0: continue    
     account = filename[sidx:]
-    accounts.append("{0}--{1}\n".format(account,getbalance(account)))
+    accounts.append("{0}--{1}\n".format(account,getBalance(account)))
 
 file2 = open('acc.lst', 'w')
 file2.writelines(accounts)
