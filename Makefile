@@ -38,12 +38,12 @@ genkey.rand.eth:
 
 chkacc.eth:
 	@read -p "Type Address: " address; \
-	 python -c "from eth.req import getBalance; print getBalance('$$address')"
+	 python -c "from eth.etherscan import getBalance; print getBalance('$$address')"
 	@$(MAKE) -sC . clean
 
 chknonce.eth:
 	@read -p "Type Address: " address; \
-	 python -c "from eth.req import getnonce; print getnonce('$$address')"	
+	 python -c "from eth.req_infura import getnonce; print getnonce('$$address')"	
 
 priv2addr.eth:
 	@read -p "Type Private Key: " privkey; \
@@ -83,7 +83,55 @@ create.contract.eth:
 	 read -p "Type Value: " value; \
 	 read -p "Type Data: " data; \
 	 python -c "from eth.tx import transfer; transfer('$$fromprivkey','$$toaddr','$$value','$$data');"
-	 
+
+# Wrapper ETH PART
+## deposit()                0xd0e30db0
+## withdraw(uint)           0x2e1a7d4d
+## approve(address,uint)    0x095ea7b3
+## transfer(address,uint)   0xa9059cbb
+WRAPPER_CONTRACT_ADDRESS = 'c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+
+deposit.weth:
+	@read -p "Type From PrivKey: " fromprivkey; \
+	 read -p "Type Value: " value; \
+	 gasprice=$$(python -c "print(120*10**9)); \
+	 gaslimit=$$(python -c "print(45000)); \
+	 methodid=d0e30db0; \
+	 python -c "from eth.tx import transfer; transfer('$$fromprivkey',${WRAPPER_CONTRACT_ADDRESS},'$$value','$$methodid',$$gasprice,$$gaslimit);"
+
+withdraw.weth:
+	@read -p "Type From PrivKey: " fromprivkey; \
+	 read -p "Type Value(Wad): " wad; \
+	 param_int=$$(python3 -c "hexstr=hex(int($$wad*10**18))[2:]; print('0'*(64-len(hexstr))+hexstr)");\
+	 gasprice=$$(python -c "print(120*10**9)); \
+	 gaslimit=$$(python -c "print(45000)); \
+	 methodid=2e1a7d4d; \
+	 python -c "from eth.tx import transfer; transfer('$$fromprivkey',${WRAPPER_CONTRACT_ADDRESS},'','$$methodid$$param_int',$$gasprice,$$gaslimit);"
+
+approve.weth:
+	@read -p "Type From PrivKey: " fromprivkey; \
+     read -p "Type ToAddress(Contract): " toaddr; \
+	 read -p "Type Value(Wad): " wad; \
+	 loweraddr=$$(lowerstr $$toaddr);\
+	 param_addr=$$(python -c "print('0'*(64-len('$$loweraddr'))+'$$loweraddr')");\
+	 param_int=$$(python3 -c "hexstr=hex(int($$wad*10**18))[2:]; print('0'*(64-len(hexstr))+hexstr)");\
+	 gasprice=$$(python -c "print(120*10**9)"); \
+	 gaslimit=45000; \
+	 methodid=095ea7b3; \
+	 python -c "from eth.tx import transfer; transfer('$$fromprivkey',${WRAPPER_CONTRACT_ADDRESS},'','$$methodid$$param_addr$$param_int',$$gasprice,$$gaslimit);"
+
+transfer.weth:
+	@read -p "Type From PrivKey: " fromprivkey; \
+     read -p "Type ToAddress(Contract): " toaddr; \
+	 read -p "Type Value(Wad): " wad; \
+	 loweraddr=$$(lowerstr $$toaddr);\
+	 param_addr=$$(python -c "print('0'*(64-len('$$loweraddr'))+'$$loweraddr')");\
+	 param_int=$$(python3 -c "hexstr=hex(int($$wad*10**18))[2:]; print('0'*(64-len(hexstr))+hexstr)");\
+	 gasprice=$$(python -c "print(120*10**9)"); \
+	 gaslimit=45000; \
+	 methodid=a9059cbb; \
+	 python -c "from eth.tx import transfer; transfer('$$fromprivkey',${WRAPPER_CONTRACT_ADDRESS},'','$$methodid$$param_addr$$param_int',$$gasprice,$$gaslimit);"
+
 # COSMOS OPERATION
 genkey.cosmos:
 	@python -c "from atom.key import genkey; print genkey('cosmos')"
@@ -119,3 +167,58 @@ DATASET_PATH = dataset/100000.eth
 genkey2db.eth:
 	@if ! [ -d dataset ]; then mkdir dataset; fi
 	@python -c "from eth.key import genkeys; genkeys(${ACC_COUNT},'${DATASET_PATH}')";
+
+# create method_id
+# from ethereum.abi import method_id
+# hex(method_id("minter",[]))
+# hex(method_id("balances",['address']))
+# hex(method_id("mint",['address','uint256']))
+# hex(method_id("send",['address','uint256']))
+# Usage:
+# function name: minter
+# parameters: 
+# function name: mint
+# parameters: 'address','uint256'
+get.method.id:
+	@read -p "function name: " funcname;\
+	 read -p "parameters: " paramstr;\
+	 data=$$(python -c "from ethereum.abi import method_id;\
+	 				 	code=hex(method_id('$$funcname',[$$paramstr]));\
+						print(code[:2]+'0'*(10-len(code))+code[2:]);\
+						");\
+	 echo $$data
+
+# param: address
+# In:  htdf1ha7ryup8nc2avgesfunx2pm22waqv2cx6dj0ac
+# Out: BF7C3270279E15D623304F2665076A53BA062B06
+# 	   bf7c3270279e15d623304f2665076a53ba062b06
+#	   000000000000000000000000bf7c3270279e15d623304f2665076a53ba062b06
+param.address:
+	@read -p "byteaddr: " byteaddr;\
+	 loweraddr=$$(lowerstr $$byteaddr);\
+	 param_addr=$$(python -c "print( '0'*(64-len('$$loweraddr'))+'$$loweraddr')");\
+	 echo $$param_addr
+
+# param: int
+# In:  100000
+# Out: 
+# 	   
+#	   
+param.int:
+	@read -p "uint: " uint;\
+	 python3 -c "hexstr=hex($$uint)[2:];\
+	 			 print('0'*(64-len(hexstr))+hexstr)"
+
+# In:aaa
+# Out:0000000000000000000000000000000000000000000000000000000000616161
+param.string:
+	@read -p "string: " string;\
+	 python3 -c "hexstr=b'$$string'.hex();\
+	 			 print('0'*(64-len(hexstr))+hexstr)"
+
+# In:616161
+# Out:aaa
+hex2str:
+	@read -p "hexstr: " hexstr;\
+	 python3 -c "string=bytes.fromhex('$$hexstr').decode('utf-8') ;\
+	 			 print(string)"	 

@@ -23,7 +23,7 @@ def create(nonce, to, value, data="", gasprice=10*10**9, startgas=21000):
 def intrinsic_gas(fromaddr, to, value, data="", gasprice=10*10**9, startgas=21000):
     from eth.req_infura import getnonce
     nonce = getnonce(fromaddr)
-    print  "nonce--{0}".format(nonce)
+    print("nonce--{0}".format(nonce))
     value = 0.0 if value == '' else float(value)
     value_ = int(value*10**18) if isinstance(value,float) or value < 10 else int(value)
     from rlp.utils import encode_hex,decode_hex
@@ -31,12 +31,14 @@ def intrinsic_gas(fromaddr, to, value, data="", gasprice=10*10**9, startgas=2100
     data_ = decode_hex(data)
     rawTransaction = TransactionEx(nonce, gasprice, startgas, to_, value_, data_)
     print("intrinsic gas: {0}".format(rawTransaction.intrinsic_gas_used))
+    return rawTransaction.intrinsic_gas_used
 
 def createEx(fromaddr, to, value, data="", gasprice=10*10**9, startgas=21000):
+    from eth.etherscan import getBalance
+    assert getBalance(fromaddr) >= gasprice*startgas
     from eth.req_infura import getnonce
     nonce = getnonce(fromaddr)
-    print  "nonce--{0}".format(nonce)
-
+    print("nonce--{0}".format(nonce))
     value_ = int(value*10**18) if isinstance(value,float) or value < 10 else int(value)
     from rlp.utils import encode_hex,decode_hex
     to_ = decode_hex(to[2:]) if isinstance(to,str) and to.startswith('0x') else decode_hex(to)

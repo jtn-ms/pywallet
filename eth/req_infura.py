@@ -110,5 +110,6 @@ def sendrawtransaction(signed):
     except Exception as e: return ""
 
 if __name__ == "__main__":
-    print(getblockHashByNumber("latest"))
+    # print(getblockHashByNumber("latest"))
     # print getBalance("0xddfd7f68662bef333bb7891580948e83dcd3c988")
+    print(getnonce("0xddfd7f68662bef333bb7891580948e83dcd3c988"))
