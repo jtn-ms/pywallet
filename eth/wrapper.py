@@ -3,3 +3,5 @@
 ## withdraw(uint)           0x2e1a7d4d
 ## approve(address,uint)    0x095ea7b3
 ## transfer(address,uint)   0xa9059cbb
+## balanceOf(address)       0x70a08231
+## allowance(address)       0x3e5beab9

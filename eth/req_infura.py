@@ -48,6 +48,22 @@ def getBalance(address):
         return int(balance,16)/float(10**18)
     except Exception as e: return 0
 
+def callContract(contractaddr,data):
+    contractaddr = "0x%s"%contractaddr if not contractaddr.startswith("0x") else contractaddr
+    try:
+        params = { "jsonrpc":"2.0",
+                   "method":"eth_call",
+                   "params":[{'to':contractaddr,'data': data}, "latest"],
+                   "id":1}
+        
+        res = rpc_call(params)
+        if "result" not in res:
+            return res
+        balance = extractResult(res)
+        return int(balance,16)/float(10**18)
+    except Exception as e: return 0
+
+
 def getblock(blknum):
     blknum = hex(blknum) if isinstance(blknum,int) else blknum
     blknum = "0x%s"%blknum if not blknum.startswith("0x") \
@@ -112,4 +128,6 @@ def sendrawtransaction(signed):
 if __name__ == "__main__":
     # print(getblockHashByNumber("latest"))
     # print getBalance("0xddfd7f68662bef333bb7891580948e83dcd3c988")
-    print(getnonce("0xddfd7f68662bef333bb7891580948e83dcd3c988"))
+    # print(getnonce("0xddfd7f68662bef333bb7891580948e83dcd3c988"))
+    print(callContract("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",\
+                       "0x3e5beab9000000000000000000000000ddfd7f68662bef333bb7891580948e83dcd3c988"))
