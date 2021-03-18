@@ -44,7 +44,8 @@ def createEx(fromaddr, to, value, data="", gasprice=10*10**9, startgas=21000):
     to_ = decode_hex(to[2:]) if isinstance(to,str) and to.startswith('0x') else decode_hex(to)
     data_ = decode_hex(data)
     rawTransaction = TransactionEx(nonce, gasprice, startgas, to_, value_, data_)
-    assert rawTransaction.intrinsic_gas_used < startgas
+    print("intrinsic_gas: {0}".format(rawTransaction.intrinsic_gas_used))
+    assert rawTransaction.intrinsic_gas_used <= startgas
     rlp_data = rawTransaction.unsigned
     return encode_hex(rlp_data)
 
