@@ -34,7 +34,7 @@ def genAddr(prefix,suffix):
 
 # 1000000000000000000000000000000000000000000000000000000000000000
 if __name__ == "__main__":
-    # createAddr("4f26ffbe5f04ed43630fdc30a87638d53d0b0876",446)
+    # createAddr("284b470276cd51640d29f7dcbabc4583eb136a03",0)
     for i in range(64):
-        genAddr("0"*i+"1", 0)
+        genAddr("284b470276cd51640d29f7dcbabc4583eb136a03", 0)
     # genAddr("00000000000000000000000000000000000000","ff")
