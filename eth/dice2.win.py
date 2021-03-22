@@ -22,6 +22,17 @@ from __future__ import absolute_import
 # YOU CAN'T BE FREE FROM EVERTHING.
 # QUIT CONDITION SHOULD BE PRESETTLED.
 # KEEP ORIGIN
+# [TAcTIc]
+# 1 2 5 10 20 50 ...
+# 1 3 9 27 81 ((1+3+9+27+81)*2+1)....                                       |
+# [FISHING GAME]                                                            |    
+# FISHMAN BAIT A TRAP, I AM A CUNNING FISH.                                  \_
+# I STEAL BAIT WITHOUT BEING TRAPPED                                           \_ 
+# BIG FISH EAT SMALL FISH                                               ^        |   
+# I GROW MYSELF SECRETLY. MAKE SURE NO ONE KNOWS OF YOUR EXISTENCE.      \      /
+# TRAVEL MUCH, TARGET MANY,                                                \___/
+# SHRIMP->JELLYFISH->CATFISH->OCTOPUS->SHARK->WHALE->HOMO->GOD
+# EAT BAIT, AVOID HOOK
 MAX_MASK_MODULO = 100#dice:6, coin flip:2
 MAX_BET_MASK = 2 ** MAX_MASK_MODULO
 POPCNT_MULT = int("0000000000002000000000100000000008000000000400000000020000000001",16)
