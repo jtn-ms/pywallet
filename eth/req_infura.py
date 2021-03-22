@@ -18,15 +18,22 @@
 
 import requests
 
-signed_url = "https://mainnet.infura.io/v3/09af14756ba347898112f3b8259e9e6e"
 
-from req_util import str2dict,extractResult
+
+try:
+    from eth.consts import INFURA_KEY
+    from eth.req_util import str2dict, extractResult
+except:
+    from req_util import str2dict, extractResult
+    from consts import INFURA_KEY
+
+signed_url = "https://mainnet.infura.io/v3/%s"%INFURA_KEY
 
 def rpc_call(params):
     if isinstance(params,dict):
         params = str(params).replace("'", '"')
     cmd = "curl -i -X POST -H 'Content-Type: application/json' --data '{0}' {1}".format(params,signed_url)
-    print cmd
+    print(cmd)
     # print address
     import subprocess
     return subprocess.check_output(cmd,shell=True)
