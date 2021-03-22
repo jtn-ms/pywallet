@@ -26,6 +26,13 @@ def privkeyfromrandom():
     addr = privtoaddr(privkey)
     return addr.encode('hex'),privkey.encode('hex')
 
+# 2**(16**2)
+# my fortune reaches to at most double or triple.
+# 256 wins in binary option is unimaginable.
+# FREQUENCY IS GOD
+def privkeyfrombinary():
+    pass
+
 def genkey(keystring=''):
     return privkeyfromstring(keystring) if keystring else privkeyfromrandom()
 
