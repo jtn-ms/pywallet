@@ -59,7 +59,7 @@ def getBlockHash(blkum):
     return int(blknum,16),blkhash
 
 def getTokenBalance(contractaddr,address):
-    address = "0x%s"%contractaddr if not contractaddr.startswith("0x") else contractaddr
+    contractaddr = "0x%s"%contractaddr if not contractaddr.startswith("0x") else contractaddr
     address = "0x%s"%address if not address.startswith("0x") else address
     url = "https://api.etherscan.io/api?module=account&action=tokenbalance&\
            contractaddress={0}&\
@@ -67,6 +67,7 @@ def getTokenBalance(contractaddr,address):
            tag=latest&\
            apikey={2}".format(contractaddr,address,API_KEY)
     url = url.replace(" ","")
+    print(url)
     try:
         res = requests.get(url)
         if res.status_code != 200:
@@ -81,4 +82,4 @@ if __name__ == "__main__":
     # getBlock("latest")
     # print(getBlockHash("latest"))
     print(getTokenBalance("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",\
-                          "0x9651e25a28c7d356db9b044e344f72781b3cdcba"))
+                          "a1b1ee61f7102dfdc5c374957afc402225ed1e58"))

@@ -7,12 +7,15 @@ from __future__ import absolute_import
 # BUT COMMIT IS SHA3(REVEAL), SO YOU CAN'T PREDICT IT.
 # WHERE REAL RNG IS BLOCK HASH & NUMBER. EVEN THOUGH YOU PUT HIGHEST FEE ON YOUR TX
 # SITLL YOU HAVE NO IDEA WHICH BLOCK NUMBER & HASH WILL BE FOR YOU.
-# [SOLUTION]
+#############################################################
+# [ATTITUDE]
 # USE BEGINNER'S LUCK
 # ONCE LOSE, ABANDON THE ACCOUNT
 # BELIEVE YOUR FIRST THOUGHT. IF ANY BAD FEELING, AVOID
 # REFRESH YOUR MIND. MAKE SURE YOU ATTEND THE GAME AS A BEGINNER.
 # FORGET ABOUT WHAT YOU EARN, WHAT YOU LOSE.
+# NEVER INCREASE YOUR BET EVEN THOUGH YOU KEEP WINNING.
+# DOUBLE & TRIPLE IS LUCK, FIVETIMES IS GRADUATION.
 # DEAL WITH DEVIL
 # IF YOU WANT TO BECOME SOMEONE, YOU SHOULD KILL YOURSELF AS BORN FIRST.
 # IF THE GAME DEFEATS ALL HUMAN, YOU SHOULD HAVE NON-HUMAN MIND & HEART(NO HEART).
@@ -26,10 +29,16 @@ from __future__ import absolute_import
 # YOU CAN'T BE FREE FROM EVERTHING.
 # QUIT CONDITION SHOULD BE PRESETTLED.
 # KEEP ORIGIN
+###############################################
 # [TAcTIc]
 # 1 2 5 10 20 50 ...
 # 3**(0,1,2,3,4,5,6,7,8,...)
-# 1 3 9 27 81 ((1+3+9+27+81)*2+1)....                                       |
+# 1 3 9 27 81 ((1+3+9+27+81)*2+1)....
+############################################################
+# YOU ARE NOTHING MORE THAN FISH. THEY LURE YOU INTO THE TRAP
+# IF YOU ARE ENOUGH CUNNING TO STEAL THE BAIT WITHOUT BEING TRAPPED,
+# YOU CAN SURVIVE ON THEIR FEED.
+#########################################################################   |
 # [FISHING GAME]                                                            |    
 # FISHMAN BAIT A TRAP, I AM A CUNNING FISH.                                  \_
 # I STEAL BAIT WITHOUT BEING TRAPPED                                           \_ 
@@ -40,9 +49,11 @@ from __future__ import absolute_import
 # EAT BAIT, AVOID HOOK
 # SENSING DANGER, DISAPPEAR
 # ATTACK WEAK, AVOID STRONG
+######################################
 # [LURE]
 # FOR FISHING - HOOK, NET
 # FOR HUNTING - TRAP
+#########################################
 # [FreQenCy]
 # Frequency Is God
 # WHEN
@@ -50,6 +61,8 @@ from __future__ import absolute_import
 # HOW MANY
 # HOW MUCH
 # WHERE
+# WHAT(doesn't matter, control your mind, I always bet on small. That represents my promise for good purpose.)
+# [CAUTION]
 # POWER IS HARD TO AVOID. WHEN IT COMES, IT WILL AWAKE YOU.
 MAX_MASK_MODULO = 100#dice:6, coin flip:2
 MAX_BET_MASK = 2 ** MAX_MASK_MODULO
