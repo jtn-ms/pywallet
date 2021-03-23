@@ -11,6 +11,8 @@ from __future__ import absolute_import
 # USE BEGINNER'S LUCK
 # ONCE LOSE, ABANDON THE ACCOUNT
 # BELIEVE YOUR FIRST THOUGHT. IF ANY BAD FEELING, AVOID
+# REFRESH YOUR MIND. MAKE SURE YOU ATTEND THE GAME AS A BEGINNER.
+# FORGET ABOUT WHAT YOU EARN, WHAT YOU LOSE.
 # DEAL WITH DEVIL
 # IF YOU WANT TO BECOME SOMEONE, YOU SHOULD KILL YOURSELF AS BORN FIRST.
 # IF THE GAME DEFEATS ALL HUMAN, YOU SHOULD HAVE NON-HUMAN MIND & HEART(NO HEART).
@@ -26,6 +28,7 @@ from __future__ import absolute_import
 # KEEP ORIGIN
 # [TAcTIc]
 # 1 2 5 10 20 50 ...
+# 3**(0,1,2,3,4,5,6,7,8,...)
 # 1 3 9 27 81 ((1+3+9+27+81)*2+1)....                                       |
 # [FISHING GAME]                                                            |    
 # FISHMAN BAIT A TRAP, I AM A CUNNING FISH.                                  \_
