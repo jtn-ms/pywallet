@@ -23,7 +23,6 @@ def getBalance(address):
         res = requests.get(url)
         if res.status_code != 200:
             return 0
-        # print(res.text)
         balance = str2dict(res.text)["result"]
         return int(balance)
     except Exception as e: return 0
@@ -76,10 +75,11 @@ def getTokenBalance(contractaddr,address):
         balance = str2dict(res.text)["result"]
         return int(balance)
     except Exception as e: return 0
-    
+
+# https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2    
 if __name__ == "__main__":
-    # print(getBalance("0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae"))
+    print(getBalance("0000000000000000000000000000000000000000"))
     # getBlock("latest")
     # print(getBlockHash("latest"))
-    print(getTokenBalance("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",\
-                          "a1b1ee61f7102dfdc5c374957afc402225ed1e58"))
+    # print(getTokenBalance("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",\
+                        #   "2f92f536fdac962a1136e76e057e58c1524a1938"))
