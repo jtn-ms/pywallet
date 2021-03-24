@@ -68,7 +68,7 @@ transfer.eth:
 	@read -p "Type From PrivKey: " fromprivkey; \
      read -p "Type To Address: " toaddr; \
 	 read -p "Type Value: " value; \
-	 python -c "from eth.tx import transfer; transfer('$$fromprivkey','$$toaddr',$$value);"
+	 python -c "from eth.tx import transfer; transfer('$$fromprivkey','$$toaddr',$$value, gasprice=125*10**9);"
 
 calc.intrinsic.gas:
 	@read -p "Type From PrivKey: " fromprivkey; \
