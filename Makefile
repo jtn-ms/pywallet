@@ -94,7 +94,7 @@ WRAPPER_CONTRACT_ADDRESS = 'c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
 deposit.weth:
 	@read -p "Type From PrivKey: " fromprivkey; \
 	 read -p "Type Value: " value; \
-	 gasprice=$$(python -c "print(190*10**9)"); \
+	 gasprice=$$(python -c "print(160*10**9)"); \
 	 gaslimit=45000; \
 	 methodid=d0e30db0; \
 	 python -c "from eth.tx import transfer; transfer('$$fromprivkey',${WRAPPER_CONTRACT_ADDRESS},'$$value','$$methodid',$$gasprice,$$gaslimit);"

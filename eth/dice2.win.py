@@ -1,12 +1,16 @@
 #!/usr/bin/env python
 from __future__ import absolute_import
 # ALL-IN(背水一战): 死去获得重生, 1到10, 我经过好几次(5次以上)做过没有退路的赌博.
-# 获得一切,失去一切. 人生如一场戏. 0.1,0.3,0.6,0.9,1.1
+# 获得一切,失去一切. 人生如一场戏. 0.1,0.3,0.6,0.9,1.1(0.5,0.1.2 fail)
 # 大起大落, 喜怒哀乐, 失败与成功，我经验的每场赌博想活不同的人的人生一样
 # 一个礼拜的时间过去了但好像几年过去一样，思考的多，失去的多，懂得多
 #　起死回生－人生一次体验就够了．我现在很累．
 # 现在满足的话，我回停在这儿．永远得不到我想要的．
 # 但我现在没有继续做下去的勇气和力气．我需要休息．
+# 每个事情都是需要认真对待，才有结果．赌博也不是玩儿的．玩儿的就是你的命
+# 回避会失去更多．需要勇敢面对．
+# 不能控制频率的话，你永远得不到你所想得.
+# NO PAIN, NO GAIN
 # [PROBLEM]
 # BLOCK HASH IS KINDS OF RANDOM NUMBER, UNPREDICTABLE
 # REVEAL IS CLOSED, MAYBE TIME_BASED ALSO UNPREDICTABLE
@@ -27,7 +31,6 @@ from __future__ import absolute_import
 # DON"T BELIEVE ANY MIRACLE. TREAT YOUR LUCK CAUTIOUSLY.
 # DON"T BREAK YOUR RHYTHM. KEEP STABLE, CAUTIOUS, MATURE
 # I NEED TO ACCOMPLISH PSYCHOLOGICAL MATURITY.
-
 # YOU SHOULD KILL YOURSELF FIRST BEFORE YOU WANT TO BECOME SOMEBODY.
 # YOU CAN"T ACHIEVE YOUR OBJECTIVE OVERNIGHT. NEVER HASTE.
 #############################################################
@@ -57,6 +60,12 @@ from __future__ import absolute_import
 # 1 2 5 10 20 50 ...
 # 3**(0,1,2,3,4,5,6,7,8,...)
 # 1 3 9 27 81 ((1+3+9+27+81)*2+1)....
+# 0.1,0.3,0.6,0.9,1.1(0.5,1.2 failed)
+# Frequency: BET AMOUNT, IP LOCATION, INTERVAL
+# 背水一战: ALL-IN
+# 走为上： 遇到危险（LOSE）,跑（ABANDON THE ACCOUNT）　
+# 游击战： MAKE SURE NO ONE RECOGNIZE YOU. GAIN SMALL & RETREAT, BUT COME BACK AGAIN.
+# 抛砖引玉,李代桃僵: WIN OVER BIG, LOSE OVER SMALL. IT MAKES YOU ALWAYS EARN. AND ALSO DON'T BREAK GOD's RULE
 ############################################################
 # YOU ARE NOTHING MORE THAN FISH. THEY LURE YOU INTO THE TRAP
 # IF YOU ARE ENOUGH CUNNING TO STEAL THE BAIT WITHOUT BEING TRAPPED,
