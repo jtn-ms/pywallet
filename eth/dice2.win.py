@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 from __future__ import absolute_import
+# ALL-IN(背水一战): 死去获得重生, 1到10, 我经过好几次(5次以上)做过没有退路的赌博.
+# 获得一切,失去一切. 人生如一场戏. 0.1,0.3,0.6,0.9,1.1
+# 大起大落, 喜怒哀乐, 失败与成功，我经验的每场赌博想活不同的人的人生一样
+# 一个礼拜的时间过去了但好像几年过去一样，思考的多，失去的多，懂得多
+#　起死回生－人生一次体验就够了．我现在很累．
+# 现在满足的话，我回停在这儿．永远得不到我想要的．
+# 但我现在没有继续做下去的勇气和力气．我需要休息．
 # [PROBLEM]
 # BLOCK HASH IS KINDS OF RANDOM NUMBER, UNPREDICTABLE
 # REVEAL IS CLOSED, MAYBE TIME_BASED ALSO UNPREDICTABLE
@@ -20,7 +27,7 @@ from __future__ import absolute_import
 # DON"T BELIEVE ANY MIRACLE. TREAT YOUR LUCK CAUTIOUSLY.
 # DON"T BREAK YOUR RHYTHM. KEEP STABLE, CAUTIOUS, MATURE
 # I NEED TO ACCOMPLISH PSYCHOLOGICAL MATURITY.
-# 大起大落, 喜怒哀乐, 失败与成功
+
 # YOU SHOULD KILL YOURSELF FIRST BEFORE YOU WANT TO BECOME SOMEBODY.
 # YOU CAN"T ACHIEVE YOUR OBJECTIVE OVERNIGHT. NEVER HASTE.
 #############################################################
