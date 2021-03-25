@@ -78,8 +78,8 @@ def getTokenBalance(contractaddr,address):
 
 # https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2    
 if __name__ == "__main__":
-    print(getBalance("0000000000000000000000000000000000000000"))
+    # print(getBalance("0000000000000000000000000000000000000000"))
     # getBlock("latest")
     # print(getBlockHash("latest"))
-    # print(getTokenBalance("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",\
-                        #   "2f92f536fdac962a1136e76e057e58c1524a1938"))
+    print(getTokenBalance("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",\
+                          "8e44115bcc1bbc395eee326331c2ee38e0e1b1e2"))

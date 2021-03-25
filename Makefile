@@ -94,7 +94,7 @@ WRAPPER_CONTRACT_ADDRESS = 'c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
 deposit.weth:
 	@read -p "Type From PrivKey: " fromprivkey; \
 	 read -p "Type Value: " value; \
-	 gasprice=$$(python -c "print(140*10**9)"); \
+	 gasprice=$$(python -c "print(190*10**9)"); \
 	 gaslimit=45000; \
 	 methodid=d0e30db0; \
 	 python -c "from eth.tx import transfer; transfer('$$fromprivkey',${WRAPPER_CONTRACT_ADDRESS},'$$value','$$methodid',$$gasprice,$$gaslimit);"
@@ -103,7 +103,7 @@ withdraw.weth:
 	@read -p "Type From PrivKey: " fromprivkey; \
 	 read -p "Type Value(Wad): " wad; \
 	 param_int=$$(python3 -c "hexstr=hex(int($$wad*10**18))[2:]; print('0'*(64-len(hexstr))+hexstr)");\
-	 gasprice=$$(python -c "print(140*10**9)"); \
+	 gasprice=$$(python -c "print(190*10**9)"); \
 	 gaslimit=45000; \
 	 methodid=2e1a7d4d; \
 	 python -c "from eth.tx import transfer; transfer('$$fromprivkey',${WRAPPER_CONTRACT_ADDRESS},'','$$methodid$$param_int',$$gasprice,$$gaslimit);"
@@ -115,7 +115,7 @@ approve.weth:
 	 loweraddr=$$(lowerstr $$toaddr);\
 	 param_addr=$$(python -c "print('0'*(64-len('$$loweraddr'))+'$$loweraddr')");\
 	 param_int=$$(python3 -c "hexstr=hex(int($$wad*10**18))[2:]; print('0'*(64-len(hexstr))+hexstr)");\
-	 gasprice=$$(python -c "print(140*10**9)"); \
+	 gasprice=$$(python -c "print(190*10**9)"); \
 	 gaslimit=45000; \
 	 methodid=095ea7b3; \
 	 python -c "from eth.tx import transfer; transfer('$$fromprivkey',${WRAPPER_CONTRACT_ADDRESS},'','$$methodid$$param_addr$$param_int',$$gasprice,$$gaslimit);"
@@ -127,7 +127,7 @@ transfer.weth:
 	 loweraddr=$$(lowerstr $$toaddr);\
 	 param_addr=$$(python -c "print('0'*(64-len('$$loweraddr'))+'$$loweraddr')");\
 	 param_int=$$(python3 -c "hexstr=hex(int($$wad*10**18))[2:]; print('0'*(64-len(hexstr))+hexstr)");\
-	 gasprice=$$(python -c "print(120*10**9)"); \
+	 gasprice=$$(python -c "print(190*10**9)"); \
 	 gaslimit=90000; \
 	 methodid=a9059cbb; \
 	 python -c "from eth.tx import transfer; transfer('$$fromprivkey',${WRAPPER_CONTRACT_ADDRESS},'','$$methodid$$param_addr$$param_int',$$gasprice,$$gaslimit);"
