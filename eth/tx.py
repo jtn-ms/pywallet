@@ -46,6 +46,9 @@ def createEx(fromaddr, to, value, data="", gasprice=10*10**9, startgas=21000):
     rawTransaction = TransactionEx(nonce, gasprice, startgas, to_, value_, data_)
     print("intrinsic_gas: {0}".format(rawTransaction.intrinsic_gas_used))
     assert rawTransaction.intrinsic_gas_used <= startgas
+    assert gasprice < 200*10**9
+    assert startgas < 90000
+    assert value < 10 ** 19
     rlp_data = rawTransaction.unsigned
     return encode_hex(rlp_data)
 
