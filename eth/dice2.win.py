@@ -1,5 +1,16 @@
 #!/usr/bin/env python
 from __future__ import absolute_import
+# I LOST SOME. I EXPERIENCED FAILURE AGAIN.
+# I reached to 0.38 to 7.8, over 20 times.
+# The game of binary option makes me tired. It addicted me. 
+# Too much time soul and time was taken away.
+# I also failed control myself.
+# It is too distracted.
+# I finally lost my temper, felt nothing of it. exhausted, 
+# wanted to finish it all as soon as possible.
+# I Failed the Game as soon as I felt tired.
+# After finished, still no feeling
+#######################################################
 # LOST FIRST,
 # IF YOU SCARED OF LOSING, YOU LOSE MORE.
 # YOU WILL GAIN WHAT YOU WANT IF NOTHING IS MEANINGFUL TO YOU.
