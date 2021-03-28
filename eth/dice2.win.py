@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 from __future__ import absolute_import
+# LOST FIRST,
+# IF YOU SCARED OF LOSING, YOU LOSE MORE.
+# YOU WILL GAIN WHAT YOU WANT IF NOTHING IS MEANINGFUL TO YOU.
+# NO FEELING, NOTHING AFRAID
+# 该去去，该来的来，何必高兴，何必伤心
+#######################################################
 # ALL-IN(背水一战): 死去获得重生, 1到10, 我经过好几次(5次以上)做过没有退路的赌博.
 # 获得一切,失去一切. 人生如一场戏. 0.1,0.3,0.6,0.9,1.1(0.5,0.1.2 fail)
 # 大起大落, 喜怒哀乐, 失败与成功，我经验的每场赌博想活不同的人的人生一样
