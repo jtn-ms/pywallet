@@ -10,6 +10,27 @@ from __future__ import absolute_import
 # wanted to finish it all as soon as possible.
 # I Failed the Game as soon as I felt tired.
 # After finished, still no feeling
+# [OUT OF CONTROL]
+# ALL-IN TWICE IN A DAY, WHAT A RIDICULOUS CODE!
+# 3.8 WIN, but keep playing, try to make new candidate, but failed.
+# Then serious to playing
+# if you are not serious anymore, it will return no.
+# I dedicated to 1,000,000. 1 to 100 is too far to catch.
+# LIMIT TO EVERYDAY TRY COUNTS.
+# ALSO LIMIT TO FINISH CONDITION.
+# IN A WEEK, 1 to 20 is not bad achievement.
+# I AM AFRAID OF BAD EFFECT OF THIS GAME. IT COULD DESTROY YOU.
+# GAME DOESN'T CHANGE, BUT YOU CHANGE YOURSELF.
+# TIRED, SCARED,
+# I AM NOT PREPARED OF DEADLOCK. THERE WAS NO OTHER SELECTION BUT 100 or 0
+# I DIDN'T WANT TO WASTE TIME IF IT NEEDS TOO MUCH TIME CONSUMPTION.
+# THIS IS NOT TACTIC GAME. IT IS SOUL GAME. YOU NEED TO BRACE YOURSELF.
+# HOW TO KEEP YOURSELF FROM BEING ADDICTED.
+# IF YOU FAIL TO CONTROL YOURSELF, YOU CAN WIN THE GAME.
+# YOU HAVE TO DEFEAT YOURSELF, KILL YOURSELF. FIND INNER PEACE IN YOUR MIND.
+# 一切都是命运的安排
+# 1.2, 1.5, 1.8, 4.1 ALL-IN FAILED
+# 0.1, 0.2, 0.3 , 0.5, 0.6, 0.9, 1.1, 2.1 , 3.9
 #######################################################
 # LOST FIRST,
 # IF YOU SCARED OF LOSING, YOU LOSE MORE.
