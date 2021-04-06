@@ -1,7 +1,27 @@
 #!/usr/bin/env python
-from __future__ import absolute_import
+from __future__ import 
+# YOU SHOULD ASK YOURSELF BEFORE START SOMETHING, AM I SERIOUS ENOUGH FOR IT?
+# DEFEATED IS NOT ALWAYS BAD, WHILE VICTORY IS NOT ALWAYS GOOD.
+###################################################
+# LOST, SOME PITTY, BUT, SOME HAPPY. FEEL FREE, FEEL LIBERATED FROM HIGH RISK & IMPOSSIBLE MISSION
+# IT TOOK WHOLE MY ENERGY & CONCENTRATION.
+# IT MADE ME THRILLED, BUT OVERSTRESSED MADE ME MAD.
+# YOU CAN STAND AGAINST IT IN A WEEK, BUT NO LONGER
+# TIRED OF DEADLOCK, NO FREE TIME FOR OTHER BUSINESS, HIGH RISK,
+# THEN WHAT EVEN IF I ACHIEVED THE GOAL. I AM NOT PREPARED YET FOR CIRCUMSTANCES IT WILL BRING.
+# FREEDOM LEADS TO OUT OF CONTROL. IT WILL TOTALLY DESTROY YOU.
+# I SPENT 1000$ TO BUY FEELING OF GAINING 20x AND ALSO LOSING ALL OF IT. I THINK IT'S WORTH.
+# I FIND MANY FLAWS IN MY MIND. I AM NOT RIPE PSYCHOLOGICALLY. IT'S TERRIBLE DANGER WHEN I ACHIEVED THE GOAL IN THIS SITUATION.
+# I WOULD BE TOTALLY OUT OF CONTROL. COMPLETELY GRAVED.
+####################################################
+# [STATES TO COPE WITH]
+# - FAILED AT FIRST
+# - STUCK IN DEADLOCK
+# - LOSE ALL
+# - ACHIEVE, THEN PREVENT FROM OUT OF CONTROL.
+####################################################
 # I LOST SOME. I EXPERIENCED FAILURE AGAIN.
-# I reached to 0.38 to 7.8, over 20 times.
+# I reached to 0.38 to 7.8, over 20x.
 # The game of binary option makes me tired. It addicted me. 
 # Too much time soul and time was taken away.
 # I also failed control myself.
@@ -10,6 +30,27 @@ from __future__ import absolute_import
 # wanted to finish it all as soon as possible.
 # I Failed the Game as soon as I felt tired.
 # After finished, still no feeling
+# [OUT OF CONTROL]
+# ALL-IN TWICE IN A DAY, WHAT A RIDICULOUS CODE!
+# 3.8 WIN, but keep playing, try to make new candidate, but failed.
+# Then serious to playing
+# if you are not serious anymore, it will return no.
+# I dedicated to 1,000,000. 1 to 100 is too far to catch.
+# LIMIT TO EVERYDAY TRY COUNTS.
+# ALSO LIMIT TO FINISH CONDITION.
+# IN A WEEK, 1 to 20 is not bad achievement.
+# I AM AFRAID OF BAD EFFECT OF THIS GAME. IT COULD DESTROY YOU.
+# GAME DOESN'T CHANGE, BUT YOU CHANGE YOURSELF.
+# TIRED, SCARED,
+# I AM NOT PREPARED OF DEADLOCK. THERE WAS NO OTHER SELECTION BUT 100 or 0
+# I DIDN'T WANT TO WASTE TIME IF IT NEEDS TOO MUCH TIME CONSUMPTION.
+# THIS IS NOT TACTIC GAME. IT IS SOUL GAME. YOU NEED TO BRACE YOURSELF.
+# HOW TO KEEP YOURSELF FROM BEING ADDICTED.
+# IF YOU FAIL TO CONTROL YOURSELF, YOU CAN WIN THE GAME.
+# YOU HAVE TO DEFEAT YOURSELF, KILL YOURSELF. FIND INNER PEACE IN YOUR MIND.
+# 一切都是命运的安排
+# 1.2, 1.5, 1.8, 4.1 ALL-IN FAILED
+# 0.1, 0.2, 0.3 , 0.5, 0.6, 0.9, 1.1, 2.1 , 3.9
 #######################################################
 # LOST FIRST,
 # IF YOU SCARED OF LOSING, YOU LOSE MORE.
