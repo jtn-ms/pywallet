@@ -66,6 +66,7 @@ def callContract(contractaddr,data):
         res = rpc_call(params)
         if "result" not in res:
             return res
+        print("res:%s"%res)
         balance = extractResult(res)
         return int(balance,16)/float(10**18)
     except Exception as e: return 0
@@ -136,5 +137,7 @@ if __name__ == "__main__":
     # print(getblockHashByNumber("latest"))
     # print getBalance("0xddfd7f68662bef333bb7891580948e83dcd3c988")
     # print(getnonce("0xddfd7f68662bef333bb7891580948e83dcd3c988"))
-    print(callContract("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",\
-                       "0x3e5beab9000000000000000000000000ddfd7f68662bef333bb7891580948e83dcd3c988"))
+    # print(callContract("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",\
+    #                    "0x3e5beab9000000000000000000000000ddfd7f68662bef333bb7891580948e83dcd3c988"))
+    print(callContract("0xd1ceeeeee83f8bcf3bedad437202b6154e9f5405",\
+                       "0x8da5cb5b"))
