@@ -1,5 +1,22 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/env python
-from __future__ import 
+from __future__ import absolute_import
+
+#
+# [controllable]
+#--|    
+#  |--- 
+#
+# abandon the losers
+# [uncontrollable]
+#
+# |-----
+#-|
+#    |----
+#----|
+#
+# first fail, under 50% success rate, should give up
+###################################################
 # YOU SHOULD ASK YOURSELF BEFORE START SOMETHING, AM I SERIOUS ENOUGH FOR IT?
 # DEFEATED IS NOT ALWAYS BAD, WHILE VICTORY IS NOT ALWAYS GOOD.
 ###################################################
@@ -158,7 +175,7 @@ from __future__ import
 # WHAT(doesn't matter, control your mind, I always bet on small. That represents my promise for good purpose.)
 # [CAUTION]
 # POWER IS HARD TO AVOID. WHEN IT COMES, IT WILL AWAKE YOU.
-MAX_MASK_MODULO = 100#dice:6, coin flip:2
+MAX_MASK_MODULO = 40#dice:6, coin flip:2
 MAX_BET_MASK = 2 ** MAX_MASK_MODULO
 POPCNT_MULT = int("0000000000002000000000100000000008000000000400000000020000000001",16)
 POPCNT_MASK = int("0001041041041041041041041041041041041041041041041041041041041041",16)
@@ -204,18 +221,24 @@ bet=dict()
 # Only Croupier/Dealer has priviledge to disclose the bet result
 # commit for secretSigner
 def commitBet(amount,mask,modulo,blkhash,reveal):
-
+    nmask = int(mask,16) if not isinstance(mask,int) else mask
+    nmodulo = int(modulo,16) if not isinstance(modulo,int) else modulo
     # placeBet
-    assert modulo > 1 and modulo < MAX_MASK_MODULO
+    print(nmask,nmodulo)
+    # assert nmodulo > 1 and nmodulo <= MAX_MASK_MODULO
     assert amount > MIN_BET and  amount < MAX_AMOUNT
-    assert mask > 0 and mask < MAX_BET_MASK
-    rollUnder=((mask*POPCNT_MULT)&POPCNT_MASK) % POPCNT_MODULO
-    # print("rollUnder: {0}".format(rollUnder))
-    diceWinAmount,jackpotFee = getDiceWinAmount(amount, modulo, rollUnder)
-    # print("diceWinAmount: {0},jackpotFee: {1}".format(diceWinAmount,jackpotFee))
+    assert nmask > 0 and nmask < MAX_BET_MASK
+    if nmodulo <= MAX_MASK_MODULO:
+        rollUnder=((nmask*POPCNT_MULT)&POPCNT_MASK) % POPCNT_MODULO
+    else:
+        rollUnder = nmask
+    assert rollUnder > 0 and rollUnder < modulo
+    print("rollUnder: {0}".format(rollUnder))
+    diceWinAmount,jackpotFee = getDiceWinAmount(amount, nmodulo, rollUnder)
+    print("diceWinAmount: {0},jackpotFee: {1}".format(diceWinAmount,jackpotFee))
     # settleBet, settleBetCommon
-    dice = roll(modulo,reveal,blkhash)
-    isWin=determine(modulo,dice,mask,rollUnder)
+    dice = roll(nmodulo,reveal,blkhash)
+    isWin=determine(nmodulo,dice,nmask,rollUnder)
     diceWin,jackpotWin=0,0
     if isWin: print("You Win!!!!");diceWin=diceWinAmount
     else: print("You Lose!!!!")
@@ -223,14 +246,15 @@ def commitBet(amount,mask,modulo,blkhash,reveal):
     return isWin
 
 def roll(modulo,reveal,blkhash):
+    blkhash = blkhash[2:] if "0x" in blkhash else blkhash
     from sha3 import keccak_256
     from ethereum.abi import encode_single,encode_abi
     encoded = encode_abi(('uint256','bytes32'),(long(reveal,16),blkhash.decode("hex")))
-    # print("encoded: {0}".format(encoded.encode('hex')))
+    print("encoded: {0}".format(encoded.encode('hex')))
     entropy=keccak_256(encoded).hexdigest()
-    # print("entropy: {0}".format(entropy))
+    print("entropy: {0}".format(entropy))
     dice = int(entropy,16) % modulo
-    # print("dice: {0}/0~5".format(dice))
+    print("dice: {0}/0~5".format(dice))
     return dice
 
 def determine(modulo,dice,mask,rollUnder):
@@ -242,6 +266,7 @@ def determine(modulo,dice,mask,rollUnder):
         if ((2 ** dice) & mask) != 0:
             return True
     elif dice < rollUnder:
+        print("your bet:{0}-{1}".format(dice,rollUnder))
         return True
     return False
 
@@ -322,7 +347,34 @@ def simMany(times=10):
         if simOne(): winCount+=1
     print("win-{0}/{1}".format(winCount,times))
 
+def validate():
+    import json
+    bets = json.load(open('./sim/result.json','r'))
+    bet = bets["2"]
+    mask = bet["bet"]
+    modulo = bet["modulo"]
+    blkhash = bet["blkhash"]
+    reveal = bet["reveal"]
+    commit = bet["commit"]
+    from sha3 import keccak_256
+    if bet["reveal"] != "":
+        entropy=keccak_256(bet["reveal"].decode("hex")).hexdigest()
+        assert entropy == commit
+    else:
+        reveal=commit
+    try:
+        from eth.scrape import blknum2blkhash
+    except:
+        from scrape import blknum2blkhash
+    blknum = bet["blknum"]
+    for i in range(10):
+        commitBet(0.1,mask,modulo,blknum2blkhash(blknum+i),reveal)
+
 if __name__ == "__main__":
     # test_losecase()
     # test_wincase1()
-    simMany()
+    # test_one()
+    validate()
+
+
+
