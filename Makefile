@@ -22,7 +22,7 @@ stop.all:
 	@pkill -9 python
 
 # Ethereum Operations
-genkey.eth:
+genkey.string:
 	@read -p "Type Key String: " seed; \
 	 python -c "from eth.key import privkeyfromstring; print privkeyfromstring('$$seed')"
 	@$(MAKE) -sC . clean
@@ -49,22 +49,22 @@ priv2addr.eth:
 	@read -p "Type Private Key: " privkey; \
 	 python -c "from eth.key import priv2addr; print priv2addr('$$privkey')"
 
-create.eth:
+create.tx:
 	@read -p "Type From Address: " fromaddr; \
      read -p "Type To Address: " toaddr; \
 	 read -p "Type Value: " value; \
 	 python -c "from eth.tx import createEx; print createEx('$$fromaddr','$$toaddr',$$value)"
 
-sign.eth:
+sign.tx:
 	@read -p "Type Unsigned Transaction: " unsigned; \
      read -p "Type Private Key: " privkey; \
 	 python -c "from eth.tx import sign; print sign('$$privkey','$$unsigned')"
 
-broadcast.eth:
+broadcast.tx:
 	@read -p "Type Signed Transaction: " signed; \
 	 python -c "from eth.tx import broadcast; print broadcast('$$signed')"
 
-transfer.eth:
+transfer.tx:
 	@read -p "Type From PrivKey: " fromprivkey; \
      read -p "Type To Address: " toaddr; \
 	 read -p "Type Value: " value; \
@@ -77,7 +77,7 @@ calc.intrinsic.gas:
 	 read -p "Type Data: " data; \
 	 python -c "from eth.tx import intrinsic_gas; intrinsic_gas('$$fromprivkey','$$toaddr','$$value','$$data');"	
 
-create.contract.eth:
+create.contract.tx:
 	@read -p "Type From PrivKey: " fromprivkey; \
      read -p "Type To Address: " toaddr; \
 	 read -p "Type Value: " value; \
