@@ -3,7 +3,18 @@
 
 ### install
 ```
+git clone git@github.com:deep2essence/pywallet --recursive
+cd pywallet
 pip3 install -r requirements.txt
+```
+### Setting
+```
+[setting.yaml]
+network:ropsten
+```
+### Test
+```
+python3 -m unittest discover -s tests/ethereum 
 ```
 ### Usage
 - create account

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import rlp
 import ethereum
@@ -38,25 +38,3 @@ class MyTransaction(ethereum.transactions.Transaction):
     @publickey.setter
     def publickey(self, value):
         self._publickey = value
-
-
-def main():
-    nonce = 21
-    gasprice = 125*10**9
-    startgas = 100000
-    to = ''
-    value = int(0.02 * 10**18)
-    data = ''
-    sender = "0xc6f4f527587ea4a03aa85e0322783592367c1b9a"
-    r = "0xab90122dc4e4bbdbb14ef22ad3ae21aecc19a1c90a9c8989c68b26cc782ff303"
-    s ="0x36e5f275147049d3afd5d33b735cc9313d2c1aad3ab401aefdce678128e2f1d0"
-    v = "0x1c"
-    r = int(r, 16)
-    s = int(s, 16)
-    v = int(v, 16)
-    tx = MyTransaction(nonce, gasprice, startgas, to, value, data, v, r, s)
-    print tx.publickey,sender[2:]
-    assert sender[2:] == ethereum.utils.sha3(tx.publickey)[-20:].hex()
-
-if __name__ == '__main__':
-    main()

@@ -8,3 +8,5 @@ pyethash==0.1.27
 ethereum==2.3.1
 bitcoin==1.1.42
 requests>=2.25.0
+# web3==5.16.0
+toml==0.10.2

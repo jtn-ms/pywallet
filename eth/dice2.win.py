@@ -7,66 +7,6 @@ from __future__ import absolute_import
 # BUT COMMIT IS SHA3(REVEAL), SO YOU CAN'T PREDICT IT.
 # WHERE REAL RNG IS BLOCK HASH & NUMBER. EVEN THOUGH YOU PUT HIGHEST FEE ON YOUR TX
 # SITLL YOU HAVE NO IDEA WHICH BLOCK NUMBER & HASH WILL BE FOR YOU.
-#############################################################
-# [ATTITUDE]
-# USE BEGINNER'S LUCK
-# ONCE LOSE, ABANDON THE ACCOUNT
-# BELIEVE YOUR FIRST THOUGHT. IF ANY BAD FEELING, AVOID
-# REFRESH YOUR MIND. MAKE SURE YOU ATTEND THE GAME AS A BEGINNER.
-# FORGET ABOUT WHAT YOU EARN, WHAT YOU LOSE.
-# NEVER INCREASE YOUR BET EVEN THOUGH YOU KEEP WINNING.
-# DOUBLE & TRIPLE IS LUCK, FIVETIMES IS GRADUATION SIGNAL.
-# EVERYTHING IS NOTHING MORE THAN NUMBER. DO IT JUST LIKE PLAYING GAME.
-# KEEP THE RULE, COOLIFY YOUR HEAD.
-# TEST THE DAY's LUCK. MAKE DECISION ACCORDING TO IT, KEEP PLAYING OR QUITING
-# DEAL WITH DEVIL
-# IF YOU WANT TO BECOME SOMEONE, YOU SHOULD KILL YOURSELF AS BORN FIRST.
-# IF THE GAME DEFEATS ALL HUMAN, YOU SHOULD HAVE NON-HUMAN MIND & HEART(NO HEART).
-# EMPTY YOUR MIND, INNER PEACE, BALANCE BETWEEN VANITY & SANITY, BRACE YOURSELF
-# FIND YOUR RHYTHM & FREQUENCY
-# COLD HEART, EVERTHING IS NOTHING MORE THAN NUMBER. WIN OR LOSE
-# TRY, REJECT, CONFIRM
-# NOTHING FREE, YOU HAVE TO PAY FOR IT.
-# I JUST BORROW IT, SOMEDAY I WILL RETURN IT BACK.
-# IF YOU ARE THE SELECTED, YOU WILL HAVE TO SERVE.
-# YOU CAN'T BE FREE FROM EVERTHING.
-# QUIT CONDITION SHOULD BE PRESETTLED.
-# KEEP ORIGIN
-###############################################
-# [TAcTIc]
-# 1 2 5 10 20 50 ...
-# 3**(0,1,2,3,4,5,6,7,8,...)
-# 1 3 9 27 81 ((1+3+9+27+81)*2+1)....
-############################################################
-# YOU ARE NOTHING MORE THAN FISH. THEY LURE YOU INTO THE TRAP
-# IF YOU ARE ENOUGH CUNNING TO STEAL THE BAIT WITHOUT BEING TRAPPED,
-# YOU CAN SURVIVE ON THEIR FEED.
-#########################################################################   |
-# [FISHING GAME]                                                            |    
-# FISHMAN BAIT A TRAP, I AM A CUNNING FISH.                                  \_
-# I STEAL BAIT WITHOUT BEING TRAPPED                                           \_ 
-# BIG FISH EAT SMALL FISH                                               ^        |   
-# I GROW MYSELF SECRETLY. MAKE SURE NO ONE KNOWS OF YOUR EXISTENCE.      \      /
-# TRAVEL MUCH, TARGET MANY,                                                \___/
-# SHRIMP->JELLYFISH->CATFISH->OCTOPUS->SHARK->WHALE->HOMO->GOD
-# EAT BAIT, AVOID HOOK
-# SENSING DANGER, DISAPPEAR
-# ATTACK WEAK, AVOID STRONG
-######################################
-# [LURE]
-# FOR FISHING - HOOK, NET
-# FOR HUNTING - TRAP
-#########################################
-# [FreQenCy]
-# Frequency Is God
-# WHEN
-# HOW OFTEN
-# HOW MANY
-# HOW MUCH
-# WHERE
-# WHAT(doesn't matter, control your mind, I always bet on small. That represents my promise for good purpose.)
-# [CAUTION]
-# POWER IS HARD TO AVOID. WHEN IT COMES, IT WILL AWAKE YOU.
 MAX_MASK_MODULO = 100#dice:6, coin flip:2
 MAX_BET_MASK = 2 ** MAX_MASK_MODULO
 POPCNT_MULT = int("0000000000002000000000100000000008000000000400000000020000000001",16)
@@ -134,7 +74,8 @@ def commitBet(amount,mask,modulo,blkhash,reveal):
 def roll(modulo,reveal,blkhash):
     from sha3 import keccak_256
     from ethereum.abi import encode_single,encode_abi
-    encoded = encode_abi(('uint256','bytes32'),(long(reveal,16),blkhash.decode("hex")))
+    from eth.utils import hexstr2int,hexstr2bytes
+    encoded = encode_abi(('uint256','bytes32'),(hexstr2int(reveal),hexstr2bytes(blkhash)))
     # print("encoded: {0}".format(encoded.encode('hex')))
     entropy=keccak_256(encoded).hexdigest()
     # print("entropy: {0}".format(entropy))
@@ -189,7 +130,7 @@ def test_one():
 
 def getcurtime():
     import time
-    return round(time.time() * 1000)
+    return round(time.time() * 1000) % 1000
 
 def genMask(modulo):
     # print("modulo: {0}".format("1"*modulo))
@@ -199,14 +140,11 @@ def genMask(modulo):
 
 # mask   = "000000000000000000000000000000000000000000000000000000000000000f"
 # modulo = "0000000000000000000000000000000000000000000000000000000000000006"
-try:
-    from eth.etherscan import getBlockHash
-except:
-    from etherscan import getBlockHash
+from etherscan import getBlockHash
 def simOne(mask="000111"):
     # blkhash
     print("#"*50)
-    pblknum,blkhash=getBlockHash("latest")
+    _,blkhash=getBlockHash("latest")
     assert blkhash != ''
     blkhash = blkhash[2:] if '0x' in blkhash else blkhash
     amount = 0.25
@@ -232,6 +170,4 @@ def simMany(times=10):
     print("win-{0}/{1}".format(winCount,times))
 
 if __name__ == "__main__":
-    # test_losecase()
-    # test_wincase1()
-    simMany()
+    simOne()

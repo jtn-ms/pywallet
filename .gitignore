@@ -5,3 +5,5 @@ tmp
 output
 *.abi
 *.bin
+.vscode/
+__pycache__/

@@ -7,11 +7,11 @@ from web3 import Web3, HTTPProvider
 from web3.contract import Contract
 
 try:
-    from eth.consts import INFURA_KEY
-    from eth.req_util import str2dict, extractResult
+    from eth.setting import INFURA_KEY
+    from eth.utils import str2dict, extractResult
 except:
-    from req_util import str2dict, extractResult
-    from consts import INFURA_KEY
+    from .utils import str2dict, extractResult
+    from .setting import INFURA_KEY
 
 signed_url = "https://mainnet.infura.io/v3/%s"%INFURA_KEY
 

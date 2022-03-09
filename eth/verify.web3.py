@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/env python3
 
 # var sig = secp256k1.sign(msgHash, privateKey)
@@ -9,8 +10,8 @@
 # from ethereum.utils import sha3
 import json
 
-import web3
-import web3.eth
+# import web3
+# import web3.eth
 from web3 import Web3, HTTPProvider
 from web3.contract import Contract
 
@@ -20,6 +21,7 @@ w3 = Web3(HTTPProvider(signed_url))
 
 addr = "0xc6f4f527587ea4a03aa85e0322783592367c1b9a"
 ethaddr = Web3.toChecksumAddress(addr[2:] if '0x' in addr else addr)
+print(type(ethaddr))
 # Web3.sha3(0x747874)
 # Web3.sha3(b'\x74\x78\x74')
 # Web3.sha3(hexstr='0x747874')
@@ -49,5 +51,7 @@ import web3
 #       '0xd3CdA913deB6f67967B99D67aCDFa1712C293601',
 #       hexstr='0x736f6d652d746578742d74c3b62d7369676e')
 # '0x1a8bbe6eab8c72a219385681efefe565afd3accee35f516f8edf5ae82208fbd45a58f9f9116d8d88ba40fcd29076d6eada7027a3b412a9db55a0164547810cc401'
-sig = w3.eth.sign(ethaddr, text=privkey.hex())
+# from rlp.utils import encode_hex,decode_hex
+print(type(privkey))
+sig = w3.eth.sign(ethaddr, privkey.hex())
 print(type(sig))

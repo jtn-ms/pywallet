@@ -1,0 +1,10 @@
+author: Frank
+network: ropsten
+mainnet:
+    etherscan: https://api.etherscan.io
+    infura: https://mainnet.infura.io/v3/
+ropsten:
+    etherscan: https://api-ropsten.etherscan.io
+    infura: https://ropsten.infura.io/v3/
+
+    

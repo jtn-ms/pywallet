@@ -3,7 +3,7 @@ from ethereum.abi import encode_single,encode_abi
 from rlp.utils import decode_hex,encode_hex
 
 def createAddr(addr,nonce):
-    encoded = encode_abi(('bytes32','uint64'),(addr.decode("hex"),long(nonce)))
+    encoded = encode_abi(('bytes32','uint64'),(addr.decode("hex"),nonce))
     print(encoded.encode('hex'))
     contractAddr = keccak_256(encoded).digest()[12:]
     print(contractAddr.encode('hex'))
@@ -24,7 +24,8 @@ def genAddr(prefix,suffix):
     suffix = suffix.strip("0x")
     decoded=prefix + (64-len(prefix) -len(suffix)) * '0' + suffix
     print("decoded: {0}".format(decoded))
-    encoded=decoded.decode("hex")
+    from rlp.utils import decode_hex,encode_hex
+    encoded=decode_hex(decoded)
     # privkey = keccak_256(encoded).digest()
     addr = privtoaddr(encoded)
     # contractAddr = keccak_256(encoded).digest()[-20:]

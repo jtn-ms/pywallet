@@ -21,22 +21,21 @@ import requests
 
 
 try:
-    from eth.consts import INFURA_KEY
-    from eth.req_util import str2dict, extractResult
+    from eth.setting import INFURA_SIGNED_URL
+    from eth.utils import str2dict, extractResult
 except:
-    from req_util import str2dict, extractResult
-    from consts import INFURA_KEY
+    from .utils import str2dict, extractResult
+    from .setting import INFURA_SIGNED_URL
 
-signed_url = "https://mainnet.infura.io/v3/%s"%INFURA_KEY
+signed_url = INFURA_SIGNED_URL
 
 def rpc_call(params):
     if isinstance(params,dict):
         params = str(params).replace("'", '"')
-    cmd = "curl -i -X POST -H 'Content-Type: application/json' --data '{0}' {1}".format(params,signed_url)
-    print(cmd)
+    cmd = "curl --silent -i -X POST -H 'Content-Type: application/json' --data '{0}' {1}".format(params,signed_url)
     # print address
     import subprocess
-    return subprocess.check_output(cmd,shell=True)
+    return subprocess.getoutput(cmd).split("\n")[-1]
 
 # ('HTTP/1.1 200 OK\r\nDate: Tue, 02 Mar 2021 10:10:34 GMT\r\nContent-Type: application/json\r\nContent-Length: 54\r\nConnection: keep-alive\r\nVary: Origin\r\n\r\n{"jsonrpc":"2.0","id":1,"result":"0x773da15214bb8c00"}', <type 'str'>)
 # https://medium.com/@piyopiyo/how-to-get-ethereum-balance-with-json-rpc-api-provided-by-infura-io-6e5d22d25927
@@ -97,8 +96,12 @@ def getblockHashByNumber(blknum):
     blkres = getblock(blknum)
     if blkres == '':
         return ''
-    blknum = blkres[unicode('number')].encode('ascii','ignore')
-    blkhash = blkres[unicode('hash')].encode('ascii','ignore')
+    import sys
+    if sys.version_info[0]<3:
+        blknum = blkres[unicode('number')].encode('ascii','ignore')
+        blkhash = blkres[unicode('hash')].encode('ascii','ignore')
+    else: 
+        blknum,blkhash = blkres['number'],blkres['hash']
     return int(blknum,16),blkhash
 
 def getnonce(address):
@@ -134,7 +137,7 @@ def sendrawtransaction(signed):
 
 if __name__ == "__main__":
     # print(getblockHashByNumber("latest"))
-    # print getBalance("0xddfd7f68662bef333bb7891580948e83dcd3c988")
-    # print(getnonce("0xddfd7f68662bef333bb7891580948e83dcd3c988"))
-    print(callContract("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",\
-                       "0x3e5beab9000000000000000000000000ddfd7f68662bef333bb7891580948e83dcd3c988"))
+    # print(getBalance("0xddfd7f68662bef333bb7891580948e83dcd3c988"))
+    print(getnonce("0xddfd7f68662bef333bb7891580948e83dcd3c988"))
+    # print(callContract("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",\
+    #                    "0x3e5beab9000000000000000000000000ddfd7f68662bef333bb7891580948e83dcd3c988"))

@@ -21,7 +21,7 @@ def create(nonce, to, value, data="", gasprice=10*10**9, startgas=21000):
     return encode_hex(rlp_data)
 
 def intrinsic_gas(fromaddr, to, value, data="", gasprice=10*10**9, startgas=21000):
-    from eth.req_infura import getnonce
+    from eth.infura import getnonce
     nonce = getnonce(fromaddr)
     print("nonce--{0}".format(nonce))
     value = 0.0 if value == '' else float(value)
@@ -36,7 +36,7 @@ def intrinsic_gas(fromaddr, to, value, data="", gasprice=10*10**9, startgas=2100
 def createEx(fromaddr, to, value, data="", gasprice=10*10**9, startgas=21000):
     from eth.etherscan import getBalance
     assert getBalance(fromaddr) >= gasprice*startgas
-    from eth.req_infura import getnonce
+    from eth.infura import getnonce
     nonce = getnonce(fromaddr)
     print("nonce--{0}".format(nonce))
     value_ = int(value*10**18) if isinstance(value,float) or value < 10 else int(value)
@@ -60,16 +60,16 @@ def sign(key,data):
     return encode_hex(signed_rlp)
 
 def broadcast(signed):
-    from eth.req_infura import sendrawtransaction
+    from eth.infura import sendrawtransaction
     return sendrawtransaction(signed)
 
 def transfer(fromprivkey, to, value, data="", gasprice=125*10**9, startgas=21000):
     from .key import priv2addr
     fromaddr = priv2addr(fromprivkey)
-    print "fromaddr--{0}".format(fromaddr)
+    print("fromaddr--{0}".format(fromaddr))
     value = 0 if value == '' else float(value)
     rawtx = createEx(fromaddr, to, value,data=data, gasprice=gasprice, startgas=startgas)
-    print "unsigned--{0}".format(rawtx)
+    print("unsigned--{0}".format(rawtx))
     signedTx = sign(fromprivkey,rawtx)
-    print "signed--{0}".format(signedTx)
-    print "txhash--{0}".format(broadcast(signedTx))
+    print("signed--{0}".format(signedTx))
+    print("txhash--{0}".format(broadcast(signedTx)))
